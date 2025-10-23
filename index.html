@@ -367,12 +367,124 @@
       }
     }
 
-    
+    /* ===================== 📱スマホ詳細調整 ===================== */
+    @media (max-width: 768px) {
 
+      /* --- Heroセクション --- */
+      #hero {
+        padding-top: 6rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.35;
+        word-break: keep-all;
+        white-space: normal;
+      }
+      /* 「ゼロからでも安心」で改行 */
+      #hero h1 br:first-child { display: inline; }
+      #hero h1::after {
+        content: "";
+      }
+      #hero h1 {
+        display: block;
+      }
+      #hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.8rem; /* CTAとの間を少し詰める */
+      }
+      #hero .cta-btn {
+        margin-top: 0.5rem;
+      }
+
+      /* --- 特徴セクション --- */
+      #reason {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      #reason .grid {
+        gap: 1.25rem !important;
+      }
+      #reason .info-card {
+        padding: 1.3rem !important;
+      }
+
+      /* --- 料金セクション --- */
+      #pricing {
+        padding-top: 3.5rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #pricing .cta-btn {
+        font-size: 1rem;
+        padding: 0.9rem 1.8rem;
+        width: auto;
+        white-space: nowrap;
+        margin-top: 1.3rem !important;
+        top: 0 !important;
+      }
+      #pricing p.text-gray-700.font-semibold {
+        top: 0 !important;
+        margin-bottom: 1rem !important;
+      }
+
+      /* --- 受講者の声 --- */
+      #voice {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      #voice .voice-item {
+        width: 88vw !important;   /* ← 見切れ防止＆バランス調整 */
+        max-width: 88vw !important;
+      }
+      #voice .info-card {
+        padding: 1.5rem 1.2rem !important;
+      }
+
+      /* --- FAQ（間延び解消） --- */
+      #faq {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      #faq .space-y-8 > * + * {
+        margin-top: 1.25rem !important; /* 特徴カードと統一 */
+      }
+      #faq .info-card {
+        padding: 1.3rem !important;
+      }
+
+      /* --- 最終CTA --- */
+      #cta {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+      }
+      #cta h2 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+      }
+      #cta p {
+        font-size: 1rem;
+        line-height: 1.6;
+        width: 90%;
+        margin: 0.5rem auto 1.5rem;
+      }
+      #cta .cta-btn {
+        font-size: 1rem;
+        padding: 0.9rem 2rem;
+        margin-top: 0.8rem;
+      }
+
+      /* --- 全体共通（行間・余白圧縮） --- */
+      section {
+        padding-top: 2.8rem !important;
+        padding-bottom: 2.8rem !important;
+      }
+      p {
+        line-height: 1.5 !important; /* 全体の行間を少し詰める */
+      }
     }
-    /* ホバーで一時停止したい場合の任意指定（必要なら有効化）
-    .voice-slider-root:hover .voice-track { animation-play-state: paused; }
-    */
+
+    
   </style>
 </head>
 
@@ -430,7 +542,7 @@
   </section>
 
   <!-- 受講者の声（ベース構造はそのまま／動的にスライダー化） -->
-  <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-28 px-6 fade-section">
+  <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">受講者の声</h2>
       <div class="grid md:grid-cols-3 gap-8">
