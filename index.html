@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --main-blue: #1E3A8A;
@@ -25,6 +26,7 @@
       background-color: #fff;
     }
 
+    /* ===================== ナビバー ===================== */
     header {
       position: fixed;
       top: 0; left: 0;
@@ -37,34 +39,24 @@
     .nav-link { color: white; font-weight: 600; transition: color 0.3s; }
     .nav-link:hover { color: var(--gold-text); }
 
-    /* モバイルメニュー */
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background: var(--main-blue);
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      padding: 1rem 0;
-    }
-    .mobile-menu.active { display: flex; }
-
-    /* CTAボタン */
+    /* ===================== CTAボタン ===================== */
     .cta-btn {
       position: relative;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 800;
       letter-spacing: 0.03em;
       color: #ffffff;
-      background: linear-gradient(135deg, var(--main-blue), var(--mid-blue), var(--light-blue));
+      background: linear-gradient(135deg, var(--main-blue) 0%, var(--mid-blue) 40%, var(--light-blue) 100%);
       border-radius: 9999px;
-      padding: 1rem 2.5rem;
+      padding: 1rem 2.8rem;
       border: 2px solid transparent;
       box-shadow: inset 0 1px 3px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.3);
-      transition: all 0.4s ease;
+      overflow: hidden;
+      transition: all 0.5s ease;
       opacity: 0;
       transform: translateY(30px);
+      background-size: 120% 120%;
+      background-position: 30% 50%;
       z-index: 1;
       animation: breathe 4.5s ease-in-out infinite;
       margin-top: 1rem;
@@ -72,15 +64,16 @@
 
     @keyframes breathe {
       0%, 100% { transform: translateY(30px) scale(1); }
-      50% { transform: translateY(30px) scale(1.05); }
+      50% { transform: translateY(30px) scale(1.06); }
     }
 
     .cta-btn:hover {
       transform: translateY(30px) scale(1.08);
       color: var(--gold-text);
-      text-shadow: 0 0 6px rgba(255, 236, 180, 0.9);
+      text-shadow: 0 0 6px rgba(255, 236, 180, 0.9), 0 0 20px rgba(255, 240, 200, 0.6);
       border-color: var(--champagne-border);
-      box-shadow: 0 0 10px var(--champagne-glow);
+      box-shadow: 0 0 10px var(--champagne-glow), 0 0 24px rgba(255, 240, 200, 0.3);
+      background-position: 70% 50%;
     }
 
     .shine {
@@ -89,8 +82,10 @@
       left: -130%;
       width: 130%;
       height: 100%;
+      pointer-events: none;
+      z-index: 2;
       background: linear-gradient(120deg, transparent 20%, rgba(255, 240, 210, 0.9) 50%, transparent 80%);
-      animation: shineLTR 2s ease-in-out forwards;
+      animation: shineLTR 2.0s ease-in-out forwards;
     }
     @keyframes shineLTR {
       from { left: -130%; opacity: 0; }
@@ -104,13 +99,30 @@
       transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
+    /* ===================== Hero ===================== */
     .hero {
       position: relative;
-      background: linear-gradient(90deg, var(--main-blue), #2046C0, var(--light-blue));
+      overflow: hidden;
+      background: linear-gradient(90deg, var(--main-blue) 0%, #2046C0 40%, var(--light-blue) 100%);
       background-size: 200% 200%;
       animation: gradientFlow 15s ease-in-out infinite;
-      padding: 6rem 1rem 8rem;
-      text-align: center;
+      padding-bottom: 6rem !important;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -50%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      animation: heroShine 15s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes heroShine {
+      0% { left: -50%; opacity: 0; }
+      20% { opacity: 1; }
+      50% { left: 100%; opacity: 1; }
+      80% { opacity: 0.8; }
+      100% { left: 100%; opacity: 0; }
     }
     @keyframes gradientFlow {
       0% { background-position: 0% 50%; }
@@ -118,13 +130,86 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* ===================== 💰10万円 ===================== */
     .price-3d {
+      display: inline-block;
       font-weight: 900;
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, #1e3a8a, #2563eb, #3b82f6);
+      font-size: 3rem;
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 3px rgba(0,0,0,0.25);
+      text-shadow:
+        0 2px 3px rgba(0,0,0,0.25),
+        0 4px 8px rgba(0,0,0,0.15),
+        0 0 18px rgba(80,160,255,0.45);
+      opacity: 0;
+      transform: scale(0.8);
+      position: relative;
+    }
+    .price-3d.show { animation: scaleUp 1s ease-out forwards; }
+
+    @keyframes scaleUp {
+      0% { opacity: 0; transform: scale(0.8); }
+      60% { opacity: 1; transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .gold-line {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 4px;
+      width: calc(100% + 12px);
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--gold-line1), var(--gold-line2), var(--gold-line1));
+      overflow: hidden;
+    }
+    .gold-line::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: goldFlow 6s linear infinite;
+    }
+    @keyframes goldFlow {
+      0% { left: -40%; }
+      100% { left: 110%; }
+    }
+
+    /* ===================== 料金セクション ===================== */
+    #pricing {
+      padding-bottom: 8rem;
+    }
+    #pricing .cta-btn {
+      margin-top: 0rem !important;
+      margin-bottom: 0 !important;
+      position: relative;
+      top: -2rem;
+    }
+    #pricing p.text-gray-700.font-semibold {
+      position: relative;
+      top: -0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===================== 共通 ===================== */
+    .fade-section { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    .info-card {
+      border-left: 4px solid var(--light-blue);
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15);
     }
 
     footer {
@@ -133,12 +218,49 @@
       text-align: center;
       padding: 1.5rem 0;
     }
+    
 
-    @media (max-width: 768px) {
-      .cta-btn { font-size: 1.1rem; padding: 0.8rem 2rem; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.1rem; }
+    /* 受講者の声カードに常時シャドウ＋ホバー強調 */
+    #voice .info-card {
+      background: white;
+      border-radius: 0.75rem;
+      border-left: 4px solid var(--light-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
+    #voice .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15); /* ←ホバー時は少し強い青みの影 */
+    }
+
+    /* ============== ▼ ここから追記（見た目は崩さず動きだけ） ============== */
+
+    /* 受講生の声スライダー用（JSで包むので最低限の指定） */
+    .voice-slider-root {
+      overflow-x: hidden;    /* 横方向のみ隠す */
+      overflow-y: visible;   /* ← 上下の影を見せる（重要） */
+      position: relative;
+      width: 100%;
+      display: block;
+      padding-top: 1rem;     /* 上下に影が切れないよう余白を確保 */
+      padding-bottom: 1rem;
+      z-index: 0;
+    }
+
+    .voice-track {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      width: max-content;
+      overflow: visible;     /* ← 上下方向の影を切らない（重要） */
+      will-change: auto;     /* ← transform生成のレイヤーを抑制し、影を正しく描画 */
+    }
+
+    .voice-item { flex: 0 0 auto; }
+
+    /* ホバーで一時停止したい場合の任意指定（必要なら有効化）
+    .voice-slider-root:hover .voice-track { animation-play-state: paused; }
+    */
   </style>
 </head>
 
@@ -146,7 +268,6 @@
   <!-- ヘッダー -->
   <header class="flex items-center justify-between px-6 md:px-10 py-4">
     <div class="text-2xl font-extrabold">🎬 Movie Fit</div>
-    <button id="menu-btn" class="md:hidden text-3xl focus:outline-none">☰</button>
     <nav class="hidden md:flex space-x-8 text-lg">
       <a href="#reason" class="nav-link">特徴</a>
       <a href="#pricing" class="nav-link">料金</a>
@@ -154,36 +275,113 @@
       <a href="#faq" class="nav-link">FAQ</a>
       <a href="#cta" class="nav-link">申込</a>
     </nav>
-    <div id="mobile-menu" class="mobile-menu md:hidden">
-      <a href="#reason" class="nav-link py-2 px-4">特徴</a>
-      <a href="#pricing" class="nav-link py-2 px-4">料金</a>
-      <a href="#voice" class="nav-link py-2 px-4">受講者の声</a>
-      <a href="#faq" class="nav-link py-2 px-4">FAQ</a>
-      <a href="#cta" class="nav-link py-2 px-4">申込</a>
-    </div>
   </header>
 
   <!-- Hero -->
-  <section id="hero" class="hero text-white mt-16 fade-section">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">ゼロからでも安心。案件を取れる編集力を！</h1>
-    <p class="text-lg sm:text-xl mb-10">Movie Fitで、現場で通用するスキルを最短で身につけよう。</p>
-    <a href="https://mail.google.com/" target="_blank">
+  <section id="hero" class="hero text-white text-center py-32 px-6 mt-16 fade-section">
+    <h1 class="text-5xl font-extrabold mb-6">ゼロからでも安心。案件を取れる編集力を！</h1>
+    <p class="text-xl mb-10">Movie Fitで、現場で通用するスキルを最短で身につけよう。</p>
+    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
   </section>
 
-  <!-- 以下のセクションは省略可（レイアウトはそのままスマホ対応） -->
-  <!-- ... 既存の特徴 / 料金 / 声 / FAQ / CTA / フッター ... -->
+  <!-- 特徴 -->
+  <section id="reason" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">Movie Fitが選ばれる理由</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">未経験でも安心</h3><p>基礎から実務レベルまで体系的に学べるカリキュラムを用意。</p></div>
+        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">案件獲得サポート</h3><p>卒業後も活躍できるように、案件獲得の営業サポート付き。</p></div>
+        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">仲間と学べる</h3><p>コミュニティで情報交換しながら楽しく学習を進められます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金 -->
+  <section id="pricing" class="bg-gradient-to-b from-blue-50 to-blue-100 py-20 px-6 text-center fade-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-8 border-b-4 border-blue-300 inline-block pb-2">受講料金</h2>
+      <p class="text-gray-700 mb-6 font-semibold text-lg">今だけの特別価格で受講できます</p>
+      <div class="bg-white shadow-xl rounded-2xl border-2 border-blue-300 p-10 inline-block">
+        <p class="text-2xl text-gray-400 line-through mb-2">通常価格 150,000円</p>
+        <div class="mb-8 relative inline-block">
+          <span class="price-3d">10万円</span>
+          <div class="gold-line"></div>
+        </div>
+        <p class="text-gray-700 font-semibold">手数料なしで分割払いも可能（3回 / 6回 / 12回）</p>
+        <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
+          <button class="cta-btn">今すぐ申し込む！</button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 受講者の声（ベース構造はそのまま／動的にスライダー化） -->
+  <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-28 px-6 fade-section">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">受講者の声</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「未経験から始めて、3ヶ月で案件を受注できました！」</p><p class="font-bold text-blue-900">30代男性 / 営業職</p></div>
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「仲間と一緒に学べるのが楽しくて継続できました！」</p><p class="font-bold text-blue-900">20代女性 / フリーター</p></div>
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「実践的な内容が多く、副業で収入アップにつながりました！」</p><p class="font-bold text-blue-900">40代男性 / 会社員</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ（ベース構造はそのまま） -->
+  <section id="faq" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-10 text-center border-b-4 border-blue-300 inline-block pb-2">よくある質問</h2>
+      <div class="space-y-8">
+        <div class="info-card p-6 text-left">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Q. 未経験でも大丈夫ですか？</h3>
+          <p class="text-gray-700">はい、基礎から丁寧に解説するので未経験の方でも安心です。</p>
+        </div>
+        <div class="info-card p-6 text-left">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Q. 分割払いは手数料かかりますか？</h3>
+          <p class="text-gray-700">いいえ、手数料なしで3回 / 6回 / 12回払いをご利用いただけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最終CTA -->
+  <section id="cta" class="hero text-white text-center py-24 px-6 fade-section">
+    <h2 class="text-4xl font-bold mb-6">あなたも動画編集を始めませんか？</h2>
+    <p class="text-xl mb-10">案件を取れる編集力を最短で習得しよう。</p>
+    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
+      <button class="cta-btn">今すぐ申し込む！</button>
+    </a>
+  </section>
 
   <footer><p class="text-sm">&copy; 2025 Movie Fit All Rights Reserved.</p></footer>
 
   <script>
-    // モバイルメニュー開閉
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    // =====================
+    // 🎞 セクションフェード（再表示時も再実行）
+    // =====================
+    const fadeSections = document.querySelectorAll(".fade-section");
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          const price = entry.target.querySelector(".price-3d");
+          if (price) {
+            price.classList.remove("show");
+            void price.offsetWidth;
+            price.classList.add("show");
+          }
+        } else {
+          entry.target.classList.remove("visible");
+        }
+      });
+    }, { threshold: 0.3 });
+    fadeSections.forEach(sec => fadeObserver.observe(sec));
 
-    // CTAボタンshine再実行
+    // =====================
+    // ✨ CTAボタンフェード＋shine再実行
+    // =====================
     const ctaButtons = document.querySelectorAll('.cta-btn');
     const ctaObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -200,6 +398,154 @@
       });
     }, { threshold: 0.6 });
     ctaButtons.forEach(btn => ctaObserver.observe(btn));
+
+    // =====================
+    // 🧩 受講者の声：3枚表示・1枚ずつ横スライド（継ぎ目なし）※HTML構造は変更せずJSで変換
+    // =====================
+    (function initVoiceSlider() {
+      const section = document.querySelector('#voice');
+      if (!section) return;
+      const grid = section.querySelector('.grid');
+      if (!grid) return;
+
+      // 元の子要素（カード）を配列化
+      const cards = Array.from(grid.children);
+
+      if (cards.length === 0) return;
+
+      // ラッパ生成（元の grid を root として使い、中に track を入れる）
+      grid.classList.add('voice-slider-root');
+      grid.style.display = 'block';           // コンテナ化
+      grid.style.overflow = 'hidden';         // はみ出し隠す
+      grid.style.position = 'relative';
+
+      // track 生成してカードを移動
+      const track = document.createElement('div');
+      track.className = 'voice-track';
+      // gap-8 相当（2rem）と info-card の見た目を維持
+      track.style.alignItems = 'stretch';
+
+      // 1セット目を追加
+      cards.forEach(card => {
+        const wrap = document.createElement('div');
+        wrap.className = 'voice-item';
+        wrap.appendChild(card.cloneNode(true));
+        track.appendChild(wrap);
+      });
+      // シームレス用に2セット目も追加（複製）
+      cards.forEach(card => {
+        const wrap = document.createElement('div');
+        wrap.className = 'voice-item';
+        wrap.appendChild(card.cloneNode(true));
+        track.appendChild(wrap);
+      });
+
+      // grid の中身を置き換え
+      grid.innerHTML = '';
+      grid.appendChild(track);
+
+      // スライド設定
+      const BREAK_MD = 768; // Tailwind md 以上で3枚、それ未満で1枚（元デザイン準拠）
+      let visible = (window.innerWidth >= BREAK_MD) ? 3 : 1;
+      let index = 0;
+      let itemWidth = 0;
+      let gapPx = 32; // gap-8 = 2rem ≒ 32px（Tailwindの既存デザインを踏襲）
+
+      // 幅計測
+      function measure() {
+        const firstItem = track.querySelector('.voice-item');
+        if (!firstItem) return;
+        const rect = firstItem.getBoundingClientRect();
+        // gapはflex gapで加算されるため、移動距離は item幅 + gap
+        itemWidth = rect.width + gapPx;
+        visible = (window.innerWidth >= BREAK_MD) ? 3 : 1;
+        // リサイズ時に位置をリセット
+        index = 0;
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0px)';
+        requestAnimationFrame(() => {
+          // 再度スムーズに
+          track.style.transition = 'transform 600ms ease';
+        });
+      }
+      measure();
+      window.addEventListener('resize', () => {
+        // レイアウトが安定してから再計測
+        clearTimeout(window.__voiceResizeTimer);
+        window.__voiceResizeTimer = setTimeout(measure, 200);
+      });
+
+      // 自動スライド
+      const total = cards.length;         // オリジナル枚数
+      const loopLen = total;              // 1周＝オリジナル分
+      const intervalMs = 3000;            // 1枚送る間隔（必要に応じて調整可）
+
+      function slideOnce() {
+        index += 1; // 1枚ずつ
+        track.style.transition = 'transform 600ms ease';
+        track.style.transform = `translateX(${-index * itemWidth}px)`;
+
+        // 先頭セットを超えたら瞬時にリセット（継ぎ目なし）
+        if (index >= loopLen) {
+          // アニメーション終了後に瞬間戻し
+          setTimeout(() => {
+            track.style.transition = 'none';
+            index = 0;
+            track.style.transform = 'translateX(0px)';
+            // 次フレームでトランジション復帰
+            requestAnimationFrame(() => {
+              track.style.transition = 'transform 600ms ease';
+            });
+          }, 650);
+        }
+      }
+
+      let timer = setInterval(slideOnce, intervalMs);
+
+      // 画面に見えているときだけ動かす（パフォーマンス）
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            if (!timer) timer = setInterval(slideOnce, intervalMs);
+          } else {
+            clearInterval(timer);
+            timer = null;
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(section);
+    })();
+
+    // =====================
+    // ❓ FAQ：クリックで開閉（他を閉じる仕様）
+    // =====================
+    (function initFAQToggle() {
+      const faq = document.querySelector('#faq');
+      if (!faq) return;
+      const cards = faq.querySelectorAll('.info-card');
+      cards.forEach(card => {
+        const answer = card.querySelector('p.text-gray-700');
+        if (!answer) return;
+        answer.style.display = 'none';
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', (ev) => {
+          // aタグの誤クリック防止
+          if (ev.target.tagName.toLowerCase() === 'a') return;
+
+          const isShown = answer.style.display === 'block';
+
+          // まず全ての回答を閉じる
+          faq.querySelectorAll('.info-card p.text-gray-700').forEach(p => {
+            p.style.display = 'none';
+          });
+
+          // 今クリックしたカードだけ開く（もともと開いてたら閉じる）
+          answer.style.display = isShown ? 'none' : 'block';
+        });
+      });
+    })();
+
   </script>
 </body>
 </html>
