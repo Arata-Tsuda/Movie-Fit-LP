@@ -235,29 +235,44 @@
 
     /* ============== ▼ ここから追記（見た目は崩さず動きだけ） ============== */
 
-    /* 受講生の声スライダー用（JSで包むので最低限の指定） */
-    .voice-slider-root {
-      overflow-x: hidden;    /* 横方向のみ隠す */
-      overflow-y: visible;   /* ← 上下の影を見せる（重要） */
-      position: relative;
+    /* === 受講者の声：中央基準＆見切れ防止 === */
+    #voice .voice-slider-root {
+      overflow: hidden;
       width: 100%;
-      display: block;
-      padding-top: 1rem;     /* 上下に影が切れないよう余白を確保 */
-      padding-bottom: 1rem;
-      z-index: 0;
+      position: relative;
     }
 
-    .voice-track {
+    #voice .voice-track {
       display: flex;
       align-items: stretch;
       gap: 2rem;
       width: max-content;
-      overflow: visible;     /* ← 上下方向の影を切らない（重要） */
-      will-change: auto;     /* ← transform生成のレイヤーを抑制し、影を正しく描画 */
+      padding-left: 1rem;  /* ← 左余白 */
+      padding-right: 1rem; /* ← 右余白 */
+      box-sizing: border-box;
     }
 
-    .voice-item { flex: 0 0 auto; }
+    #voice .voice-item {
+      flex: 0 0 auto;
+      width: 27vw;      /* ← 25vw → 23.5vw に変更 */
+      max-width: 27vw;  /* ← 同じ値で固定 */
+      min-width: 260px;   /* ← モバイルで小さくなりすぎないよう保険 */
+      box-sizing: border-box;
+    }
 
+
+    @media (max-width: 768px) {
+      #voice .voice-item {
+        width: 80vw;
+        max-width: 80vw;
+      }
+    }
+
+
+
+    
+
+    }
     /* ホバーで一時停止したい場合の任意指定（必要なら有効化）
     .voice-slider-root:hover .voice-track { animation-play-state: paused; }
     */
@@ -455,19 +470,24 @@
       function measure() {
         const firstItem = track.querySelector('.voice-item');
         if (!firstItem) return;
-        const rect = firstItem.getBoundingClientRect();
-        // gapはflex gapで加算されるため、移動距離は item幅 + gap
-        itemWidth = rect.width + gapPx;
-        visible = (window.innerWidth >= BREAK_MD) ? 3 : 1;
-        // リサイズ時に位置をリセット
+
+        const screenWidth = window.innerWidth;
+        const gapPx = 32; // gap-8 = 2rem
+        visible = (screenWidth >= BREAK_MD) ? 3 : 1;
+        itemWidth = firstItem.offsetWidth + gapPx;
+
+        // ★ 初期位置補正（中央寄せ＋右欠け防止）
+        const rootPaddingLeft = parseFloat(getComputedStyle(grid).paddingLeft) || 0;
+        track.style.transform = `translateX(${rootPaddingLeft}px)`;
+
+        // 位置リセット
         index = 0;
         track.style.transition = 'none';
-        track.style.transform = 'translateX(0px)';
         requestAnimationFrame(() => {
-          // 再度スムーズに
           track.style.transition = 'transform 600ms ease';
         });
       }
+
       measure();
       window.addEventListener('resize', () => {
         // レイアウトが安定してから再計測
@@ -517,31 +537,39 @@
     })();
 
     // =====================
-    // ❓ FAQ：クリックで開閉（他を閉じる仕様）
+    // ❓ FAQ：クリックで開閉（他を閉じる＋ふわっとアニメ付き）
     // =====================
     (function initFAQToggle() {
       const faq = document.querySelector('#faq');
       if (!faq) return;
       const cards = faq.querySelectorAll('.info-card');
+
       cards.forEach(card => {
         const answer = card.querySelector('p.text-gray-700');
         if (!answer) return;
-        answer.style.display = 'none';
+
+        // 初期状態：閉じる
+        answer.style.maxHeight = '0';
+        answer.style.overflow = 'hidden';
+        answer.style.transition = 'max-height 0.4s ease, opacity 0.4s ease';
+        answer.style.opacity = '0';
         card.style.cursor = 'pointer';
 
         card.addEventListener('click', (ev) => {
-          // aタグの誤クリック防止
           if (ev.target.tagName.toLowerCase() === 'a') return;
+          const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '0';
 
-          const isShown = answer.style.display === 'block';
-
-          // まず全ての回答を閉じる
+          // 全ての回答を閉じる
           faq.querySelectorAll('.info-card p.text-gray-700').forEach(p => {
-            p.style.display = 'none';
+            p.style.maxHeight = '0';
+            p.style.opacity = '0';
           });
 
-          // 今クリックしたカードだけ開く（もともと開いてたら閉じる）
-          answer.style.display = isShown ? 'none' : 'block';
+          // 今クリックした要素が閉じていた場合のみ開く
+          if (!isOpen) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.opacity = '1';
+          }
         });
       });
     })();
