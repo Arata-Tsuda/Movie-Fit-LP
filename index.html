@@ -269,6 +269,103 @@
     }
 
 
+    /* ===================== 📱スマホ最適化 ===================== */
+    @media (max-width: 768px) {
+
+      /* --- Heroセクション --- */
+      #hero h1 {
+        font-size: 1.9rem;
+        line-height: 1.3;
+        word-break: keep-all; /* 不自然な改行防止 */
+      }
+      #hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* --- 特徴セクション --- */
+      #reason {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      #reason .grid {
+        gap: 1.25rem !important;
+      }
+      #reason .info-card {
+        padding: 1.5rem !important;
+      }
+
+      /* --- 料金セクション --- */
+      #pricing {
+        padding-top: 3.5rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #pricing h2 {
+        margin-bottom: 1.5rem !important;
+      }
+      #pricing .cta-btn {
+        font-size: 1rem;
+        padding: 0.9rem 1.8rem;
+        width: auto;
+        white-space: nowrap;
+        margin-top: 1.5rem !important;
+        top: 0 !important; /* 上すぎ問題を解消 */
+      }
+      #pricing p.text-gray-700.font-semibold {
+        top: 0 !important;
+        margin-bottom: 1rem !important;
+      }
+
+      /* --- 受講者の声 --- */
+      #voice {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #voice h2 {
+        margin-bottom: 2rem !important;
+      }
+      #voice .voice-item {
+        width: 90vw !important;
+        max-width: 90vw !important;
+      }
+
+      /* --- FAQ --- */
+      #faq {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+      }
+      #faq h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem !important;
+      }
+
+      /* --- 最終CTAセクション --- */
+      #cta {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #cta h2 {
+        font-size: 2rem;
+        line-height: 1.4;
+      }
+      #cta p {
+        font-size: 1rem;
+        line-height: 1.6;
+        width: 90%;
+        margin: 0 auto;
+      }
+      #cta .cta-btn {
+        font-size: 1rem;
+        padding: 0.9rem 2rem;
+        margin-top: 1.2rem;
+      }
+
+      /* --- 全セクション共通の余白圧縮 --- */
+      section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+    }
 
     
 
