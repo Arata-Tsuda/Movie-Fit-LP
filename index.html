@@ -268,11 +268,10 @@
       }
     }
 
-
-    /* ===================== 📱スマホ専用修正版 ===================== */
+    /* ===================== 📱スマホ専用・CTAワープ完全修正版 ===================== */
     @media (max-width: 768px) {
 
-      /* --- スマホ専用改行 --- */
+      /* --- 改行 --- */
       .br-sp {
         display: block;
       }
@@ -285,16 +284,31 @@
       #hero h1 {
         font-size: 1.9rem;
         line-height: 1.35;
-        word-break: keep-all;
       }
       #hero p {
         font-size: 1rem;
         line-height: 1.6;
         margin-bottom: 1.8rem;
       }
-      #hero .cta-btn {
-        margin-top: 0.5rem;
-        transform: translateY(0); /* ← ワープ防止：初期位置固定 */
+
+      /* --- 呼吸アニメをスマホでも滑らかに動かす（transform競合解消） --- */
+      #hero .cta-btn,
+      #pricing .cta-btn,
+      #cta .cta-btn {
+        opacity: 0;
+        transform: translateY(20px); /* ← 初期位置を軽く下げる */
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        animation: none; /* ← 最初は呼吸止める（フェード後に再開） */
+        will-change: transform, opacity;
+      }
+
+      /* --- フェード後に呼吸アニメを再始動 --- */
+      .fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition-delay: 0.05s;
+      }
+      .fade-in.shine-start {
         animation: breathe 4.5s ease-in-out infinite;
       }
 
@@ -303,38 +317,18 @@
         padding-top: 3rem !important;
         padding-bottom: 3rem !important;
       }
-      #reason .grid { gap: 1.25rem !important; }
-      #reason .info-card { padding: 1.3rem !important; }
 
       /* --- 料金 --- */
       #pricing {
         padding-top: 3.5rem !important;
         padding-bottom: 4rem !important;
       }
-      #pricing .cta-btn {
-        font-size: 1rem;
-        padding: 0.9rem 1.8rem;
-        margin-top: 1.3rem !important;
-        transform: translateY(0); /* ← ワープ防止 */
-        animation: breathe 4.5s ease-in-out infinite; /* 呼吸復活 */
-      }
 
       /* --- 受講者の声 --- */
-      #voice {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
       #voice .voice-item {
         width: 88vw !important;
         max-width: 88vw !important;
       }
-
-      /* --- FAQ --- */
-      #faq {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-      #faq .space-y-8 > * + * { margin-top: 1.25rem !important; }
 
       /* --- 最終CTA --- */
       #cta {
@@ -351,22 +345,13 @@
         width: 90%;
         margin: 0.5rem auto 1.5rem;
       }
-      #cta .cta-btn {
-        font-size: 1rem;
-        padding: 0.9rem 2rem;
-        margin-top: 1.2rem;
-        transform: translateY(0); /* ← ワープ防止 */
-        animation: breathe 4.5s ease-in-out infinite; /* 呼吸アニメ再適用 */
-      }
 
-      /* --- 全体の行間・余白 --- */
+      /* --- 全体 --- */
       section {
         padding-top: 2.8rem !important;
         padding-bottom: 2.8rem !important;
       }
-      p { line-height: 1.5 !important; }
     }
-
     
   </style>
 </head>
@@ -494,34 +479,37 @@
     fadeSections.forEach(sec => fadeObserver.observe(sec));
 
     // =====================
-    // ✨ CTAボタンフェード＋shine再実行
+    // ✨ CTAボタンフェード＋shine再実行（スマホのワープ防止付き）
     // =====================
-    // CTAフェード発火タイミング調整
-　　const ctaButtons = document.querySelectorAll('.cta-btn');
-　　const ctaObserver = new IntersectionObserver(entries => {
-　　  entries.forEach(entry => {
-　　    const btn = entry.target;
-　　    if (entry.isIntersecting) {
-　　      let delay = 0; // デフォルトは同時
-　　
-　　      // セクションによって遅延を追加
-　　      if (btn.closest('#hero')) delay = 400; // 0.4秒後
-　　      if (btn.closest('#cta')) delay = 700; // 0.7秒後
-　　
-　　      setTimeout(() => {
-　　        btn.classList.add('fade-in');
-　　        const shine = document.createElement('span');
-　　        shine.className = 'shine';
-　　        btn.appendChild(shine);
-　　        shine.addEventListener('animationend', () => shine.remove(), { once: true });
-　　      }, delay);
-　　    } else {
-　　      btn.classList.remove('fade-in');
-　　    }
-　　  });
-　　}, { threshold: 0.6 });
-　　ctaButtons.forEach(btn => ctaObserver.observe(btn));
-　　
+    const ctaButtons = document.querySelectorAll('.cta-btn');
+    const ctaObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const btn = entry.target;
+        if (entry.isIntersecting) {
+          let delay = 0;
+          if (btn.closest('#hero')) delay = 400;
+          if (btn.closest('#cta')) delay = 700;
+
+          setTimeout(() => {
+            btn.classList.add('fade-in');
+            const shine = document.createElement('span');
+            shine.className = 'shine';
+            btn.appendChild(shine);
+
+            // 🧩 スマホ用：フェード後に呼吸アニメを再開
+            if (window.innerWidth <= 768) {
+              setTimeout(() => btn.classList.add('shine-start'), 600);
+            }
+
+            shine.addEventListener('animationend', () => shine.remove(), { once: true });
+          }, delay);
+        } else {
+          btn.classList.remove('fade-in', 'shine-start');
+        }
+      });
+    }, { threshold: 0.6 });
+    ctaButtons.forEach(btn => ctaObserver.observe(btn));
+
     // =====================
     // 🧩 受講者の声：3枚表示・1枚ずつ横スライド（継ぎ目なし）※HTML構造は変更せずJSで変換
     // =====================
