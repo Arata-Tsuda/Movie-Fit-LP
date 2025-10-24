@@ -345,14 +345,15 @@
         width: 90%;
         margin: 0.5rem auto 1.5rem;
         
-      /* === スマホ：料金セクションのCTAボタン改行防止 === */
       #pricing .cta-btn {
-        white-space: nowrap;      /* ← 強制的に1行に固定 */
-        width: fit-content;       /* ← テキスト分だけの幅に調整 */
-        max-width: 90%;           /* ← はみ出し防止（親より少し余裕） */
-        margin-left: auto;        /* ← 中央寄せ */
-        margin-right: auto;       /* ← 中央寄せ */
-        display: block;           /* ← Safari対策で中央揃え */
+        font-size: 0.9rem; /* ← ここで少しだけ小さく */
+        padding: 0.8rem 1.8rem;
+        white-space: nowrap; /* 念のため改行防止 */
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
       }
 
       }
