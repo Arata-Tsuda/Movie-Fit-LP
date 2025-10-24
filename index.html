@@ -269,106 +269,13 @@
     }
 
 
-    /* ===================== 📱スマホ最適化 ===================== */
+    /* ===================== 📱スマホ専用修正版 ===================== */
     @media (max-width: 768px) {
 
-      /* --- Heroセクション --- */
-      #hero h1 {
-        font-size: 1.9rem;
-        line-height: 1.3;
-        word-break: keep-all; /* 不自然な改行防止 */
+      /* --- スマホ専用改行 --- */
+      .br-sp {
+        display: block;
       }
-      #hero p {
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-
-      /* --- 特徴セクション --- */
-      #reason {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-      #reason .grid {
-        gap: 1.25rem !important;
-      }
-      #reason .info-card {
-        padding: 1.5rem !important;
-      }
-
-      /* --- 料金セクション --- */
-      #pricing {
-        padding-top: 3.5rem !important;
-        padding-bottom: 4rem !important;
-      }
-      #pricing h2 {
-        margin-bottom: 1.5rem !important;
-      }
-      #pricing .cta-btn {
-        font-size: 1rem;
-        padding: 0.9rem 1.8rem;
-        width: auto;
-        white-space: nowrap;
-        margin-top: 1.5rem !important;
-        top: 0 !important; /* 上すぎ問題を解消 */
-      }
-      #pricing p.text-gray-700.font-semibold {
-        top: 0 !important;
-        margin-bottom: 1rem !important;
-      }
-
-      /* --- 受講者の声 --- */
-      #voice {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-      #voice h2 {
-        margin-bottom: 2rem !important;
-      }
-      #voice .voice-item {
-        width: 90vw !important;
-        max-width: 90vw !important;
-      }
-
-      /* --- FAQ --- */
-      #faq {
-        padding-top: 3.5rem !important;
-        padding-bottom: 3.5rem !important;
-      }
-      #faq h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem !important;
-      }
-
-      /* --- 最終CTAセクション --- */
-      #cta {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-      #cta h2 {
-        font-size: 2rem;
-        line-height: 1.4;
-      }
-      #cta p {
-        font-size: 1rem;
-        line-height: 1.6;
-        width: 90%;
-        margin: 0 auto;
-      }
-      #cta .cta-btn {
-        font-size: 1rem;
-        padding: 0.9rem 2rem;
-        margin-top: 1.2rem;
-      }
-
-      /* --- 全セクション共通の余白圧縮 --- */
-      section {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-    }
-
-    /* ===================== 📱スマホ詳細調整 ===================== */
-    @media (max-width: 768px) {
 
       /* --- Heroセクション --- */
       #hero {
@@ -376,41 +283,30 @@
         padding-bottom: 4rem !important;
       }
       #hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
         line-height: 1.35;
         word-break: keep-all;
-        white-space: normal;
-      }
-      /* 「ゼロからでも安心」で改行 */
-      #hero h1 br:first-child { display: inline; }
-      #hero h1::after {
-        content: "";
-      }
-      #hero h1 {
-        display: block;
       }
       #hero p {
         font-size: 1rem;
         line-height: 1.6;
-        margin-bottom: 1.8rem; /* CTAとの間を少し詰める */
+        margin-bottom: 1.8rem;
       }
       #hero .cta-btn {
         margin-top: 0.5rem;
+        transform: translateY(0); /* ← ワープ防止：初期位置固定 */
+        animation: breathe 4.5s ease-in-out infinite;
       }
 
-      /* --- 特徴セクション --- */
+      /* --- 特徴 --- */
       #reason {
         padding-top: 3rem !important;
         padding-bottom: 3rem !important;
       }
-      #reason .grid {
-        gap: 1.25rem !important;
-      }
-      #reason .info-card {
-        padding: 1.3rem !important;
-      }
+      #reason .grid { gap: 1.25rem !important; }
+      #reason .info-card { padding: 1.3rem !important; }
 
-      /* --- 料金セクション --- */
+      /* --- 料金 --- */
       #pricing {
         padding-top: 3.5rem !important;
         padding-bottom: 4rem !important;
@@ -418,14 +314,9 @@
       #pricing .cta-btn {
         font-size: 1rem;
         padding: 0.9rem 1.8rem;
-        width: auto;
-        white-space: nowrap;
         margin-top: 1.3rem !important;
-        top: 0 !important;
-      }
-      #pricing p.text-gray-700.font-semibold {
-        top: 0 !important;
-        margin-bottom: 1rem !important;
+        transform: translateY(0); /* ← ワープ防止 */
+        animation: breathe 4.5s ease-in-out infinite; /* 呼吸復活 */
       }
 
       /* --- 受講者の声 --- */
@@ -434,24 +325,16 @@
         padding-bottom: 3rem !important;
       }
       #voice .voice-item {
-        width: 88vw !important;   /* ← 見切れ防止＆バランス調整 */
+        width: 88vw !important;
         max-width: 88vw !important;
       }
-      #voice .info-card {
-        padding: 1.5rem 1.2rem !important;
-      }
 
-      /* --- FAQ（間延び解消） --- */
+      /* --- FAQ --- */
       #faq {
         padding-top: 3rem !important;
         padding-bottom: 3rem !important;
       }
-      #faq .space-y-8 > * + * {
-        margin-top: 1.25rem !important; /* 特徴カードと統一 */
-      }
-      #faq .info-card {
-        padding: 1.3rem !important;
-      }
+      #faq .space-y-8 > * + * { margin-top: 1.25rem !important; }
 
       /* --- 最終CTA --- */
       #cta {
@@ -469,39 +352,19 @@
         margin: 0.5rem auto 1.5rem;
       }
       #cta .cta-btn {
-        -webkit-transform: translate3d(0, 25px, 0);
-        transition-delay: 0.1s;
-        will-change: opacity, transform;
-        backface-visibility: hidden;
+        font-size: 1rem;
+        padding: 0.9rem 2rem;
+        margin-top: 1.2rem;
+        transform: translateY(0); /* ← ワープ防止 */
+        animation: breathe 4.5s ease-in-out infinite; /* 呼吸アニメ再適用 */
+      }
 
-      /* --- 全体共通（行間・余白圧縮） --- */
-      /* スマホのみ改行を有効化 */
-      .br-sp {
-        display: none;
-      }
-      @media (max-width: 768px) {
-        .br-sp {
-          display: block;
-        }
-      }
-      
+      /* --- 全体の行間・余白 --- */
       section {
         padding-top: 2.8rem !important;
         padding-bottom: 2.8rem !important;
       }
-      p {
-        line-height: 1.5 !important; /* 全体の行間を少し詰める */
-      }
-      .cta-btn {
-        transform: translateY(15px); /* 少しだけ下げる（30px→15px） */
-        transition: opacity 0.8s ease, transform 0.8s ease;
-        will-change: transform, opacity; /* Safariで描画を安定化 */
-      }
-      .fade-in {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        transition-delay: 0.1s; /* 初回描画を遅らせてワープ防止 */
-      }
+      p { line-height: 1.5 !important; }
     }
 
     
