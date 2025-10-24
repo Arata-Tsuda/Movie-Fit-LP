@@ -9,203 +9,420 @@
 
   <style>
     :root {
-    --main-blue: #1E3A8A;
-    --mid-blue: #2563EB;
-    --light-blue: #60A5FA;
-    --gold-line1: #fce68a;
-    --gold-line2: #fff7ce;
-    --gold-text: #FFE8A3;
-    --champagne-border: rgba(255, 235, 200, 0.85);
-    --champagne-glow: rgba(255, 230, 180, 0.4);
-  }
-
-  body {
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
-    color: #333;
-    scroll-behavior: smooth;
-    background-color: #fff;
-  }
-
-  /* ===================== ナビバー ===================== */
-  header {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    background: var(--main-blue);
-    color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    z-index: 50;
-  }
-  .nav-link { color: white; font-weight: 600; transition: color 0.3s; }
-  .nav-link:hover { color: var(--gold-text); }
-
-  /* ===================== CTAボタン ===================== */
-  .cta-btn {
-    position: relative;
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: 0.03em;
-    color: #ffffff;
-    background: linear-gradient(135deg, var(--main-blue) 0%, var(--mid-blue) 40%, var(--light-blue) 100%);
-    border-radius: 9999px;
-    padding: 1rem 2.8rem;
-    border: 2px solid transparent;
-    box-shadow: inset 0 1px 3px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.3);
-    overflow: hidden;
-    transition: all 0.5s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    background-size: 120% 120%;
-    background-position: 30% 50%;
-    z-index: 1;
-    animation: breathe 4.5s ease-in-out infinite;
-    margin-top: 1rem;
-  }
-
-  @keyframes breathe {
-    0%, 100% { transform: translateY(30px) scale(1); }
-    50% { transform: translateY(30px) scale(1.06); }
-  }
-
-  .cta-btn:hover {
-    transform: translateY(30px) scale(1.08);
-    color: var(--gold-text);
-    text-shadow: 0 0 6px rgba(255, 236, 180, 0.9), 0 0 20px rgba(255, 240, 200, 0.6);
-    border-color: var(--champagne-border);
-    box-shadow: 0 0 10px var(--champagne-glow), 0 0 24px rgba(255, 240, 200, 0.3);
-    background-position: 70% 50%;
-  }
-
-  .shine {
-    position: absolute;
-    top: 0;
-    left: -130%;
-    width: 130%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    background: linear-gradient(120deg, transparent 20%, rgba(255, 240, 210, 0.9) 50%, transparent 80%);
-    animation: shineLTR 2.0s ease-in-out forwards;
-  }
-  @keyframes shineLTR {
-    from { left: -130%; opacity: 0; }
-    15% { opacity: 1; }
-    to { left: 120%; opacity: 0; }
-  }
-
-  .fade-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  /* ===================== Hero ===================== */
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(90deg, var(--main-blue) 0%, #2046C0 40%, var(--light-blue) 100%);
-    background-size: 200% 200%;
-    animation: gradientFlow 15s ease-in-out infinite;
-    padding-bottom: 6rem !important;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -50%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-    animation: heroShine 15s linear infinite;
-    pointer-events: none;
-  }
-  @keyframes heroShine {
-    0% { left: -50%; opacity: 0; }
-    20% { opacity: 1; }
-    50% { left: 100%; opacity: 1; }
-    80% { opacity: 0.8; }
-    100% { left: 100%; opacity: 0; }
-  }
-  @keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* ===================== 💰10万円 ===================== */
-  .price-3d {
-    display: inline-block;
-    font-weight: 900;
-    font-size: 3rem;
-    background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow:
-      0 2px 3px rgba(0,0,0,0.25),
-      0 4px 8px rgba(0,0,0,0.15),
-      0 0 18px rgba(80,160,255,0.45);
-    opacity: 0;
-    transform: scale(0.8);
-    position: relative;
-  }
-  .price-3d.show { animation: scaleUp 1s ease-out forwards; }
-
-  @keyframes scaleUp {
-    0% { opacity: 0; transform: scale(0.8); }
-    60% { opacity: 1; transform: scale(1.15); }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  /* ===================== 📱スマホ調整 ===================== */
-  @media (max-width: 768px) {
-
-    /* 改行制御 */
-    .br-sp { display: block; }
-
-    /* Heroセクション */
-    #hero { padding-top: 6rem !important; padding-bottom: 4rem !important; }
-    #hero h1 { font-size: 1.9rem; line-height: 1.35; }
-    #hero p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.8rem; }
-
-    /* 呼吸アニメ競合解消 */
-    #hero .cta-btn, #pricing .cta-btn, #cta .cta-btn {
-      font-size: 0.9rem;
-      padding: 0.8rem 2rem;
-      margin: 1.2rem auto !important;
-      width: fit-content;
-      animation: none;
+      --main-blue: #1E3A8A;
+      --mid-blue: #2563EB;
+      --light-blue: #60A5FA;
+      --gold-line1: #fce68a;
+      --gold-line2: #fff7ce;
+      --gold-text: #FFE8A3;
+      --champagne-border: rgba(255, 235, 200, 0.85);
+      --champagne-glow: rgba(255, 230, 180, 0.4);
     }
 
-    #hero .cta-btn, #pricing .cta-btn { top: 0.5rem; }
+    body {
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      color: #333;
+      scroll-behavior: smooth;
+      background-color: #fff;
+    }
 
-    #cta .cta-btn {
+    /* ===================== ナビバー ===================== */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--main-blue);
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 50;
+    }
+    .nav-link { color: white; font-weight: 600; transition: color 0.3s; }
+    .nav-link:hover { color: var(--gold-text); }
+
+    /* ===================== CTAボタン ===================== */
+    .cta-btn {
+      position: relative;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--main-blue) 0%, var(--mid-blue) 40%, var(--light-blue) 100%);
+      border-radius: 9999px;
+      padding: 1rem 2.8rem;
+      border: 2px solid transparent;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+      transition: all 0.5s ease;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      animation: none;
+      transform: translateY(30px);
+      background-size: 120% 120%;
+      background-position: 30% 50%;
+      z-index: 1;
+      animation: breathe 4.5s ease-in-out infinite;
+      margin-top: 1rem;
     }
 
-    /* 特徴・料金・最終CTA間余白 */
-    #reason { padding-top: 3rem !important; padding-bottom: 3rem !important; }
-    #pricing { padding-top: 3.5rem !important; padding-bottom: 4rem !important; }
-    #cta { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+    @keyframes breathe {
+      0%, 100% { transform: translateY(30px) scale(1); }
+      50% { transform: translateY(30px) scale(1.06); }
+    }
 
-    /* Heroサブコピー（チルダ演出） */
-    .hero-subcopy {
-      font-size: 1rem;
-      line-height: 1.6;
+    .cta-btn:hover {
+      transform: translateY(30px) scale(1.08);
+      color: var(--gold-text);
+      text-shadow: 0 0 6px rgba(255, 236, 180, 0.9), 0 0 20px rgba(255, 240, 200, 0.6);
+      border-color: var(--champagne-border);
+      box-shadow: 0 0 10px var(--champagne-glow), 0 0 24px rgba(255, 240, 200, 0.3);
+      background-position: 70% 50%;
+    }
+
+    .shine {
+      position: absolute;
+      top: 0;
+      left: -130%;
+      width: 130%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(120deg, transparent 20%, rgba(255, 240, 210, 0.9) 50%, transparent 80%);
+      animation: shineLTR 2.0s ease-in-out forwards;
+    }
+    @keyframes shineLTR {
+      from { left: -130%; opacity: 0; }
+      15% { opacity: 1; }
+      to { left: 120%; opacity: 0; }
+    }
+
+    .fade-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* ===================== Hero ===================== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(90deg, var(--main-blue) 0%, #2046C0 40%, var(--light-blue) 100%);
+      background-size: 200% 200%;
+      animation: gradientFlow 15s ease-in-out infinite;
+      padding-bottom: 6rem !important;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -50%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      animation: heroShine 15s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes heroShine {
+      0% { left: -50%; opacity: 0; }
+      20% { opacity: 1; }
+      50% { left: 100%; opacity: 1; }
+      80% { opacity: 0.8; }
+      100% { left: 100%; opacity: 0; }
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===================== 💰10万円 ===================== */
+    .price-3d {
       display: inline-block;
-      white-space: nowrap;
+      font-weight: 900;
+      font-size: 3rem;
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        0 2px 3px rgba(0,0,0,0.25),
+        0 4px 8px rgba(0,0,0,0.15),
+        0 0 18px rgba(80,160,255,0.45);
+      opacity: 0;
+      transform: scale(0.8);
+      position: relative;
+    }
+    .price-3d.show { animation: scaleUp 1s ease-out forwards; }
+
+    @keyframes scaleUp {
+      0% { opacity: 0; transform: scale(0.8); }
+      60% { opacity: 1; transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    /* 最終CTAサブコピー（スマホ限定文言置換） */
-    .cta-subcopy {
-      font-size: 1rem;
-      line-height: 1.6;
-      white-space: nowrap;
+    .gold-line {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 4px;
+      width: calc(100% + 12px);
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--gold-line1), var(--gold-line2), var(--gold-line1));
+      overflow: hidden;
     }
-    .cta-subcopy::before {
-      content: "～ゼロから案件が取れる自分へ～";
+    .gold-line::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: goldFlow 6s linear infinite;
     }
-  }    
+    @keyframes goldFlow {
+      0% { left: -40%; }
+      100% { left: 110%; }
+    }
+
+    /* ===================== 料金セクション ===================== */
+    #pricing {
+      padding-bottom: 8rem;
+    }
+    #pricing .cta-btn {
+      margin-top: 0rem !important;
+      margin-bottom: 0 !important;
+      position: relative;
+      top: -2rem;
+    }
+    #pricing p.text-gray-700.font-semibold {
+      position: relative;
+      top: -0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===================== 共通 ===================== */
+    .fade-section { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    .info-card {
+      border-left: 4px solid var(--light-blue);
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15);
+    }
+
+    footer {
+      background: var(--main-blue);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+    
+
+    /* 受講者の声カードに常時シャドウ＋ホバー強調 */
+    #voice .info-card {
+      background: white;
+      border-radius: 0.75rem;
+      border-left: 4px solid var(--light-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #voice .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15); /* ←ホバー時は少し強い青みの影 */
+    }
+
+    /* ============== ▼ ここから追記（見た目は崩さず動きだけ） ============== */
+
+    /* === 受講者の声：中央基準＆見切れ防止 === */
+    #voice .voice-slider-root {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    #voice .voice-track {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      width: max-content;
+      padding-left: 1rem;  /* ← 左余白 */
+      padding-right: 1rem; /* ← 右余白 */
+      box-sizing: border-box;
+    }
+
+    #voice .voice-item {
+      flex: 0 0 auto;
+      width: 27vw;      /* ← 25vw → 23.5vw に変更 */
+      max-width: 27vw;  /* ← 同じ値で固定 */
+      min-width: 260px;   /* ← モバイルで小さくなりすぎないよう保険 */
+      box-sizing: border-box;
+    }
+
+
+    @media (max-width: 768px) {
+      #voice .voice-item {
+        width: 80vw;
+        max-width: 80vw;
+      }
+    }
+
+    /* ===================== 📱スマホ専用・CTAワープ完全修正版 ===================== */
+    @media (max-width: 768px) {
+
+      /* --- 改行 --- */
+      .br-sp {
+        display: block;
+      }
+
+      /* --- Heroセクション --- */
+      #hero {
+        padding-top: 6rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #hero h1 {
+        font-size: 1.9rem;
+        line-height: 1.35;
+      }
+      #hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.8rem;
+      }
+
+      /* --- 呼吸アニメをスマホでも滑らかに動かす（transform競合解消） --- */
+      #hero .cta-btn,
+      #pricing .cta-btn,
+      #cta .cta-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 2rem;
+        margin: 1.2rem auto !important; /* ← 上下余白を揃える */
+        width: fit-content;
+        animation: none; /* ← フェード前は呼吸止める */
+      }
+    
+      #hero .cta-btn,
+      #pricing .cta-btn {
+        top: 0.5rem;
+      }
+      #cta .cta-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        animation: none;
+        will-change: transform, opacity;
+      }
+
+      /* --- フェード後に呼吸アニメを再始動 --- */
+      .fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition-delay: 0.05s;
+      }
+      .fade-in.shine-start {
+        animation: breathe 4.5s ease-in-out infinite;
+      }
+
+      /* --- 特徴 --- */
+      #reason {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+
+      /* --- 料金 --- */
+      #pricing {
+        padding-top: 3.5rem !important;
+        padding-bottom: 4rem !important;
+      }
+
+      /* ✅ スマホ専用：料金CTAのフォントサイズ調整 */
+      #pricing .cta-btn {
+        font-size: 0.85rem !important; /* ← ここで改行防止 */
+        padding: 0.8rem 1.8rem;
+        white-space: nowrap;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+
+      /* --- 受講者の声 --- */
+      #voice .voice-item {
+        width: 80vw !important;
+        max-width: 80vw !important;
+      }
+
+      /* --- 最終CTA --- */
+      #cta {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+      }
+      #cta h2 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+      }
+      #cta p {
+        font-size: 1rem;
+        line-height: 1.6;
+        width: 90%;
+        margin: 0.5rem auto 1.5rem;
+      }
+
+      /* ===================== 🎨 チルダ演出最適化 ===================== */
+
+      /* ---- 共通（PC） ---- */
+      .hero-subcopy,
+      .cta-subcopy {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        opacity: 0.95;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+      }
+
+      /* ---- Hero：スマホでもチルダ保持・折り返し防止 ---- */
+      @media (max-width: 768px) {
+        .hero-subcopy {
+          font-size: 1rem;
+          line-height: 1.6;
+          display: inline-block;
+          white-space: nowrap;
+        }
+
+        /* チルダを再表示させる（visibility hiddenを除去） */
+        .hero-subcopy::before,
+        .hero-subcopy::after {
+          content: "";
+          margin: 0 -0.15em;
+        }
+      }
+
+      /* ---- 最終CTA：スマホでは「共に歩もう」削除・チルダ残す ---- */
+      @media (max-width: 768px) {
+        .cta-subcopy {
+          font-size: 1rem;
+          line-height: 1.6;
+          white-space: nowrap;
+        }
+
+        /* スマホ時だけ文言を差し替え（共に歩もう削除） */
+        .cta-subcopy::before {
+          content: "～ゼロから案件が取れる自分へ～";
+        }
+      }
+
+
+
+      /* --- 全体 --- */
+      section {
+        padding-top: 2.8rem !important;
+        padding-bottom: 2.8rem !important;
+      }
+    }
+
+    
   </style>
 </head>
 
