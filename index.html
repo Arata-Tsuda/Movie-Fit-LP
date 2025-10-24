@@ -502,7 +502,8 @@
     fadeSections.forEach(sec => fadeObserver.observe(sec));
 
     // =====================
-    // ✨ CTAボタンフェード＋shine再実行（スマホのワープ防止＋呼吸復活付き）
+    // =====================
+    // ✨ CTAボタンフェード＋shine再実行（スマホのワープ完全防止版）
     // =====================
     const ctaButtons = document.querySelectorAll('.cta-btn');
     const ctaObserver = new IntersectionObserver(entries => {
@@ -514,33 +515,43 @@
           if (btn.closest('#cta')) delay = 700;
 
           setTimeout(() => {
-            // フェードイン開始
-            btn.classList.add('fade-in');
+            // 一旦transform固定（Y軸のみでフェード）
+            btn.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            btn.style.transform = 'translateY(0)'; // ← 定位置にスムーズに戻す
+            btn.style.opacity = '1';
 
-            // Shineエフェクト生成
+            // Shineエフェクト付与
             const shine = document.createElement('span');
             shine.className = 'shine';
             btn.appendChild(shine);
 
-            // 💡PCは従来通り、スマホはフェード後に呼吸アニメ再開
+            // 📱スマホ用：フェード後に呼吸アニメ再開（transform競合回避）
             if (window.innerWidth <= 768) {
               setTimeout(() => {
-                btn.classList.add('shine-start');
-                btn.style.animation = 'breathe 4.5s ease-in-out infinite';
-              }, 600);
+                btn.style.transition = ''; // ← transformのtransition解除
+                btn.animate(
+                  [
+                    { transform: 'translateY(0) scale(1)' },
+                    { transform: 'translateY(0) scale(1.06)' },
+                    { transform: 'translateY(0) scale(1)' }
+                  ],
+                  {
+                    duration: 4500,
+                    iterations: Infinity,
+                    easing: 'ease-in-out'
+                  }
+                );
+              }, 800); // フェード完了後に発火
             }
 
-            // Shine終了後に自動削除
+            // Shine終了後削除
             shine.addEventListener('animationend', () => shine.remove(), { once: true });
 
           }, delay);
         } else {
           // ビュー外に出たらフェード・shineリセット
-          btn.classList.remove('fade-in', 'shine-start');
-          // 呼吸アニメはスマホでは一旦止める
-          if (window.innerWidth <= 768) {
-            btn.style.animation = 'none';
-          }
+          btn.style.opacity = '0';
+          btn.style.transform = 'translateY(30px)';
         }
       });
     }, { threshold: 0.6 });
