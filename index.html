@@ -129,6 +129,21 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    
+    /* --- Hero共通（全デバイス） --- */
+    .hero-subcopy {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      opacity: 0.95;
+      color: #fff;
+      text-align: center;
+      display: block;
+      background: linear-gradient(90deg, #fff 0%, #fce68a 50%, #fff7ce 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(255, 240, 180, 0.25);
+      letter-spacing: 0.02em;
+    }
 
     /* ===================== 💰10万円 ===================== */
     .price-3d {
@@ -371,6 +386,19 @@
       }
 
       /* ===================== 🎨 チルダ演出最適化 ===================== */
+      /* --- 最終CTA共通 --- */
+      .cta-subcopy {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: #fff;
+        text-align: center;
+        display: block;
+        background: linear-gradient(90deg, #fff 0%, #ffe8a3 50%, #fff7ce 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+        letter-spacing: 0.015em;
+      }
 
       /* ---- 共通（PC） ---- */
       .hero-subcopy,
@@ -381,7 +409,35 @@
         white-space: nowrap;
         letter-spacing: -0.01em;
       }
+      
+      /* --- Hero：スマホ --- */
+      @media (max-width: 768px) {
+        .hero-subcopy {
+          font-size: 1rem;
+          line-height: 1.6;
+          text-align: center;
+          margin: 0 auto 1.5rem;
+        }
+      }
 
+      @media (max-width: 768px) {
+        .cta-subcopy {
+          display: none; /* ← 実テキスト非表示（重複防止） */
+        }
+        .cta-subcopy::before {
+          content: "～ゼロから案件が取れる自分へ～";
+          display: block;
+          font-size: 1rem;
+          line-height: 1.6;
+          text-align: center;
+          color: #fff;
+          background: linear-gradient(90deg, #fff 0%, #ffe8a3 50%, #fff7ce 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+          letter-spacing: 0.015em;
+        }
+      }
       /* ---- Hero：スマホでもチルダ保持・折り返し防止 ---- */
       @media (max-width: 768px) {
         .hero-subcopy {
@@ -515,7 +571,7 @@
   <!-- 最終CTA -->
   <section id="cta" class="hero text-white text-center py-24 px-6 fade-section">
     <h2 class="text-4xl font-bold mb-6">
-      あなたの“はじめたい”を Movie Fitが支えます。
+      あなたの“はじめたい”を Movie Fitが支えます！
     </h2>
     <p class="text-xl mb-10 cta-subcopy">
       ～ゼロから案件が取れる自分へ。共に歩もう～
