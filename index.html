@@ -195,39 +195,7 @@
       top: -0.8rem;
       margin-bottom: 1.5rem;
     }
-    /* ===================== 🎯 最終CTAセクション 最適化 ===================== */
-    #cta {
-      padding-top: 6rem !important;
-      padding-bottom: 6rem !important;
-    }
 
-    #cta h2 {
-      font-size: 2.5rem;        /* 少し大きめでHeroとトーン統一 */
-      line-height: 1.4;
-      letter-spacing: 0.02em;
-      font-weight: 900;
-      margin-bottom: 1.5rem;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.25);
-    }
-
-    #cta p {
-      font-size: 1.25rem;       /* Heroのサブよりやや小さく */
-      line-height: 1.8;
-      opacity: 0.95;
-      margin-bottom: 2.5rem;
-    }
-
-    /* --- “共に歩もう”部分を柔らかく見せる --- */
-    #cta p::after {
-      content: "";
-      display: block;
-      width: 100px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
-      margin: 1.2rem auto 0;
-      border-radius: 9999px;
-    }
-    
     /* ===================== 共通 ===================== */
     .fade-section { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
     .fade-section.visible { opacity: 1; transform: translateY(0); }
@@ -385,97 +353,29 @@
         width: 80vw !important;
         max-width: 80vw !important;
       }
-      
+
       /* --- 最終CTA --- */
       #cta {
-          padding-top: 4rem !important;
-          padding-bottom: 4rem !important;
-        }
-
-        #cta h2 {
-          font-size: 1.75rem;
-          line-height: 1.45;
-          width: 90%;
-          margin: 0 auto 1.2rem;
-        }
-
-        #cta p {
-          font-size: 1rem;
-          line-height: 1.7;
-          width: 88%;
-          margin: 0 auto 1.8rem;
-        }
-
-        /* --- スマホでは「共に歩もう」で改行を促す --- */
-        #cta p span.br-sp {
-          display: inline;
-        }
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
       }
-      
-      /* ===================== 🎯 Hero／最終CTA サブコピー最適化 ===================== */
-
-      /* デスクトップではデザインそのまま維持 */
-      .hero-subcopy,
-      .cta-subcopy {
-        font-size: 1.25rem;
-        line-height: 1.8;
-        opacity: 0.95;
+      #cta h2 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+      }
+      #cta p {
+        font-size: 1rem;
+        line-height: 1.6;
+        width: 90%;
+        margin: 0.5rem auto 1.5rem;
       }
 
-      /* 共通チルダ（～）の視覚調整 */
-      .hero-subcopy,
-      .cta-subcopy {
-        white-space: pre-wrap;
-        letter-spacing: -0.01em;
-      }
-
-      /* ===================== 📱 スマホ最適化 ===================== */
-      @media (max-width: 768px) {
-
-        /* --- Heroサブコピー：文言短縮版を自動反映 --- */
-        .hero-subcopy::before {
-          content: "未経験から最短ルートでプロへ";
-          display: inline;
-        }
-        .hero-subcopy {
-          visibility: hidden; /* 元文を非表示 */
-          height: 0;
-        }
-        .hero-subcopy::before {
-          visibility: visible;
-          height: auto;
-        }
-
-        /* --- 最終CTAサブコピー：チルダ削除＆自然改行 --- */
-        .cta-subcopy::before {
-          content: "ゼロから案件が取れる自分へ、共に歩もう";
-          display: inline;
-        }
-        .cta-subcopy {
-          visibility: hidden;
-          height: 0;
-        }
-        .cta-subcopy::before {
-          visibility: visible;
-          height: auto;
-        }
-
-        /* --- フォント＆余白調整 --- */
-        #hero p, #cta p {
-          font-size: 1rem;
-          line-height: 1.7;
-          margin-bottom: 1.8rem;
-        }
-      }
-      
       /* --- 全体 --- */
       section {
         padding-top: 2.8rem !important;
         padding-bottom: 2.8rem !important;
       }
     }
-      
-
 
     
   </style>
@@ -570,7 +470,7 @@
   <!-- 最終CTA -->
   <section id="cta" class="hero text-white text-center py-24 px-6 fade-section">
     <h2 class="text-4xl font-bold mb-6">
-      あなたの“はじめたい”を、Movie Fitが支えます。
+      あなたの“はじめたい”を Movie Fitが支えます。
     </h2>
     <p class="text-xl mb-10 cta-subcopy">
       ～ゼロから案件が取れる自分へ。共に歩もう～
@@ -579,7 +479,7 @@
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
   </section>
-  
+
   <footer><p class="text-sm">&copy; 2025 Movie Fit All Rights Reserved.</p></footer>
 
   <script>
