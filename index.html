@@ -134,17 +134,16 @@
     .hero-subcopy {
       font-size: 1.25rem;
       line-height: 1.8;
-      opacity: 0.95;
-      color: #fff;
+      color: #ffffff;
       text-align: center;
       display: block;
-      background: linear-gradient(90deg, #fff 0%, #fce68a 50%, #fff7ce 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 10px rgba(255, 240, 180, 0.25);
+      opacity: 0.95;
+      text-shadow:
+        0 0 6px rgba(255, 255, 255, 0.25),
+        0 1px 4px rgba(0, 0, 0, 0.25);
       letter-spacing: 0.02em;
     }
-
+  
     /* ===================== 💰10万円 ===================== */
     .price-3d {
       display: inline-block;
@@ -390,14 +389,14 @@
       .cta-subcopy {
         font-size: 1.25rem;
         line-height: 1.8;
-        color: #fff;
+        color: #ffffff;
         text-align: center;
         display: block;
-        background: linear-gradient(90deg, #fff 0%, #ffe8a3 50%, #fff7ce 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
-        letter-spacing: 0.015em;
+        opacity: 0.95;
+        text-shadow:
+          0 0 6px rgba(255, 255, 255, 0.25),
+          0 1px 4px rgba(0, 0, 0, 0.25);
+        letter-spacing: 0.02em;
       }
 
       /* ---- 共通（PC） ---- */
@@ -415,7 +414,6 @@
         .hero-subcopy {
           font-size: 1rem;
           line-height: 1.6;
-          text-align: center;
           margin: 0 auto 1.5rem;
         }
       }
@@ -455,21 +453,25 @@
         }
       }
 
-      /* ---- 最終CTA：スマホでは「共に歩もう」削除・チルダ残す ---- */
-      @media (max-width: 768px) {
-        .cta-subcopy {
-          font-size: 1rem;
-          line-height: 1.6;
-          white-space: nowrap;
-        }
-
-        /* スマホ時だけ文言を差し替え（共に歩もう削除） */
-        .cta-subcopy::before {
-          content: "～ゼロから案件が取れる自分へ～";
-        }
-      }
-
-
+     /* --- 最終CTA：スマホ --- */
+     @media (max-width: 768px) {
+       .cta-subcopy {
+         display: none; /* ← 重複防止 */
+       }
+       .cta-subcopy::before {
+         content: "～ゼロから案件が取れる自分へ～";
+         display: block;
+         font-size: 1rem;
+         line-height: 1.6;
+         text-align: center;
+         color: #ffffff;
+         opacity: 0.95;
+         text-shadow:
+           0 0 6px rgba(255, 255, 255, 0.25),
+           0 1px 4px rgba(0, 0, 0, 0.25);
+         letter-spacing: 0.02em;
+       }
+     }
 
       /* --- 全体 --- */
       section {
