@@ -195,7 +195,39 @@
       top: -0.8rem;
       margin-bottom: 1.5rem;
     }
+    /* ===================== 🎯 最終CTAセクション 最適化 ===================== */
+    #cta {
+      padding-top: 6rem !important;
+      padding-bottom: 6rem !important;
+    }
 
+    #cta h2 {
+      font-size: 2.5rem;        /* 少し大きめでHeroとトーン統一 */
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+    }
+
+    #cta p {
+      font-size: 1.25rem;       /* Heroのサブよりやや小さく */
+      line-height: 1.8;
+      opacity: 0.95;
+      margin-bottom: 2.5rem;
+    }
+
+    /* --- “共に歩もう”部分を柔らかく見せる --- */
+    #cta p::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+      margin: 1.2rem auto 0;
+      border-radius: 9999px;
+    }
+    
     /* ===================== 共通 ===================== */
     .fade-section { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
     .fade-section.visible { opacity: 1; transform: translateY(0); }
@@ -353,23 +385,33 @@
         width: 80vw !important;
         max-width: 80vw !important;
       }
-
+      
       /* --- 最終CTA --- */
       #cta {
-        padding-top: 3.5rem !important;
-        padding-bottom: 3.5rem !important;
-      }
-      #cta h2 {
-        font-size: 1.8rem;
-        line-height: 1.4;
-      }
-      #cta p {
-        font-size: 1rem;
-        line-height: 1.6;
-        width: 90%;
-        margin: 0.5rem auto 1.5rem;
-      }
+          padding-top: 4rem !important;
+          padding-bottom: 4rem !important;
+        }
 
+        #cta h2 {
+          font-size: 1.75rem;
+          line-height: 1.45;
+          width: 90%;
+          margin: 0 auto 1.2rem;
+        }
+
+        #cta p {
+          font-size: 1rem;
+          line-height: 1.7;
+          width: 88%;
+          margin: 0 auto 1.8rem;
+        }
+
+        /* --- スマホでは「共に歩もう」で改行を促す --- */
+        #cta p span.br-sp {
+          display: inline;
+        }
+      }
+      
       /* --- 全体 --- */
       section {
         padding-top: 2.8rem !important;
@@ -400,7 +442,7 @@
       ゼロからでも安心 <span class="br-sp"></span>案件を取れる編集力を！
     </h1>
     <p class="text-xl mb-10">
-      ～未経験からプロへ。最短ルートでスキルを磨く～
+      ー未経験からプロへ。最短ルートでスキルを磨く～
     </p>
     <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
