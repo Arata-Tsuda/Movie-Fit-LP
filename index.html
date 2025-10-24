@@ -397,7 +397,8 @@
           0 0 6px rgba(255, 255, 255, 0.25),
           0 1px 4px rgba(0, 0, 0, 0.25);
         letter-spacing: 0.02em;
-      }
+        margin-bottom: 1.5rem;
+　　　　}
 
       /* ---- 共通（PC） ---- */
       .hero-subcopy,
@@ -420,20 +421,17 @@
 
       @media (max-width: 768px) {
         .cta-subcopy {
-          display: none; /* ← 実テキスト非表示（重複防止） */
-        }
-        .cta-subcopy::before {
-          content: "～ゼロから案件が取れる自分へ～";
-          display: block;
+          display: block !important;  /* ← ← 非表示を強制解除 */
           font-size: 1rem;
           line-height: 1.6;
+          color: #ffffff;
           text-align: center;
-          color: #fff;
-          background: linear-gradient(90deg, #fff 0%, #ffe8a3 50%, #fff7ce 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
-          letter-spacing: 0.015em;
+          opacity: 0.95;
+          text-shadow:
+            0 0 6px rgba(255, 255, 255, 0.25),
+            0 1px 4px rgba(0, 0, 0, 0.25);
+          letter-spacing: 0.02em;
+          margin-bottom: 1.2rem;
         }
       }
       /* ---- Hero：スマホでもチルダ保持・折り返し防止 ---- */
