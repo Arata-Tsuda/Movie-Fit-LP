@@ -469,12 +469,22 @@
         margin: 0.5rem auto 1.5rem;
       }
       #cta .cta-btn {
-        font-size: 1rem;
-        padding: 0.9rem 2rem;
-        margin-top: 0.8rem;
-      }
+        -webkit-transform: translate3d(0, 25px, 0);
+        transition-delay: 0.1s;
+        will-change: opacity, transform;
+        backface-visibility: hidden;
 
       /* --- 全体共通（行間・余白圧縮） --- */
+      /* スマホのみ改行を有効化 */
+      .br-sp {
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .br-sp {
+          display: block;
+        }
+      }
+      
       section {
         padding-top: 2.8rem !important;
         padding-bottom: 2.8rem !important;
@@ -513,8 +523,12 @@
 
   <!-- Hero -->
   <section id="hero" class="hero text-white text-center py-32 px-6 mt-16 fade-section">
-    <h1 class="text-5xl font-extrabold mb-6">ゼロからでも安心。<br>案件を取れる編集力を！</h1>
-    <p class="text-xl mb-10">現場で通用するスキルを最短で身につけよう。</p>
+    <h1 class="text-5xl font-extrabold mb-6">
+      ゼロからでも安心<span class="br-sp"></span>案件を取れる編集力を！
+    </h1>
+    <p class="text-xl mb-10">
+      現場で通用するスキルを<span class="br-sp"></span>最短で身につけよう。
+    </p>
     <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
@@ -582,13 +596,16 @@
 
   <!-- 最終CTA -->
   <section id="cta" class="hero text-white text-center py-24 px-6 fade-section">
-    <h2 class="text-4xl font-bold mb-6">あなたも動画編集を<br>始めませんか？</h2>
-    <p class="text-xl mb-10">案件を取れる編集力を最短で習得しよう。</p>
+    <h2 class="text-4xl font-bold mb-6">
+      あなたも動画編集を<span class="br-sp"></span>始めませんか？
+    </h2>
+    <p class="text-xl mb-10">
+      案件を取れる編集力を<span class="br-sp"></span>最短で習得しよう。
+    </p>
     <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
   </section>
-
   <footer><p class="text-sm">&copy; 2025 Movie Fit All Rights Reserved.</p></footer>
 
   <script>
