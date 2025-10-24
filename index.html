@@ -633,23 +633,32 @@
     // =====================
     // ✨ CTAボタンフェード＋shine再実行
     // =====================
-    const ctaButtons = document.querySelectorAll('.cta-btn');
-    const ctaObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const btn = entry.target;
-        if (entry.isIntersecting) {
-          btn.classList.add('fade-in');
-          const shine = document.createElement('span');
-          shine.className = 'shine';
-          btn.appendChild(shine);
-          shine.addEventListener('animationend', () => shine.remove(), { once: true });
-        } else {
-          btn.classList.remove('fade-in');
-        }
-      });
-    }, { threshold: 0.6 });
-    ctaButtons.forEach(btn => ctaObserver.observe(btn));
-
+    // CTAフェード発火タイミング調整
+　　const ctaButtons = document.querySelectorAll('.cta-btn');
+　　const ctaObserver = new IntersectionObserver(entries => {
+　　  entries.forEach(entry => {
+　　    const btn = entry.target;
+　　    if (entry.isIntersecting) {
+　　      let delay = 0; // デフォルトは同時
+　　
+　　      // セクションによって遅延を追加
+　　      if (btn.closest('#hero')) delay = 400; // 0.4秒後
+　　      if (btn.closest('#cta')) delay = 700; // 0.7秒後
+　　
+　　      setTimeout(() => {
+　　        btn.classList.add('fade-in');
+　　        const shine = document.createElement('span');
+　　        shine.className = 'shine';
+　　        btn.appendChild(shine);
+　　        shine.addEventListener('animationend', () => shine.remove(), { once: true });
+　　      }, delay);
+　　    } else {
+　　      btn.classList.remove('fade-in');
+　　    }
+　　  });
+　　}, { threshold: 0.6 });
+　　ctaButtons.forEach(btn => ctaObserver.observe(btn));
+　　
     // =====================
     // 🧩 受講者の声：3枚表示・1枚ずつ横スライド（継ぎ目なし）※HTML構造は変更せずJSで変換
     // =====================
