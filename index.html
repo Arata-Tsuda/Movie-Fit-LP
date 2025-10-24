@@ -369,6 +369,61 @@
         width: 90%;
         margin: 0.5rem auto 1.5rem;
       }
+      /* ===================== 🎯 Hero／最終CTA サブコピー最適化 ===================== */
+
+      /* デスクトップではデザインそのまま維持 */
+      .hero-subcopy,
+      .cta-subcopy {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        opacity: 0.95;
+      }
+
+      /* 共通チルダ（～）の視覚調整 */
+      .hero-subcopy,
+      .cta-subcopy {
+        white-space: pre-wrap;
+        letter-spacing: -0.01em;
+      }
+
+      /* ===================== 📱 スマホ最適化 ===================== */
+      @media (max-width: 768px) {
+
+        /* --- Heroサブコピー：文言短縮版を自動反映 --- */
+        .hero-subcopy::before {
+          content: "未経験から最短ルートでプロへ";
+          display: inline;
+        }
+        .hero-subcopy {
+          visibility: hidden; /* 元文を非表示 */
+          height: 0;
+        }
+        .hero-subcopy::before {
+          visibility: visible;
+          height: auto;
+        }
+
+        /* --- 最終CTAサブコピー：チルダ削除＆自然改行 --- */
+        .cta-subcopy::before {
+          content: "ゼロから案件が取れる自分へ、共に歩もう";
+          display: inline;
+        }
+        .cta-subcopy {
+          visibility: hidden;
+          height: 0;
+        }
+        .cta-subcopy::before {
+          visibility: visible;
+          height: auto;
+        }
+
+        /* --- フォント＆余白調整 --- */
+        #hero p, #cta p {
+          font-size: 1rem;
+          line-height: 1.7;
+          margin-bottom: 1.8rem;
+        }
+      }
 
       /* --- 全体 --- */
       section {
