@@ -26,6 +26,7 @@
       background-color: #fff;
     }
 
+    /* ===================== ナビバー ===================== */
     header {
       position: fixed;
       top: 0; left: 0;
@@ -107,6 +108,22 @@
       animation: gradientFlow 15s ease-in-out infinite;
       padding-bottom: 6rem !important;
     }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -50%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      animation: heroShine 15s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes heroShine {
+      0% { left: -50%; opacity: 0; }
+      20% { opacity: 1; }
+      50% { left: 100%; opacity: 1; }
+      80% { opacity: 0.8; }
+      100% { left: 100%; opacity: 0; }
+    }
     @keyframes gradientFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -148,10 +165,52 @@
       background: linear-gradient(90deg, var(--gold-line1), var(--gold-line2), var(--gold-line1));
       overflow: hidden;
     }
+    .gold-line::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: goldFlow 6s linear infinite;
+    }
+    @keyframes goldFlow {
+      0% { left: -40%; }
+      100% { left: 110%; }
+    }
 
-    /* ===================== 共通フェード ===================== */
+    /* ===================== 料金セクション ===================== */
+    #pricing {
+      padding-bottom: 8rem;
+    }
+    #pricing .cta-btn {
+      margin-top: 0rem !important;
+      margin-bottom: 0 !important;
+      position: relative;
+      top: -2rem;
+    }
+    #pricing p.text-gray-700.font-semibold {
+      position: relative;
+      top: -0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===================== 共通 ===================== */
     .fade-section { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
     .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    .info-card {
+      border-left: 4px solid var(--light-blue);
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15);
+    }
 
     footer {
       background: var(--main-blue);
@@ -159,21 +218,164 @@
       text-align: center;
       padding: 1.5rem 0;
     }
+    
 
-    /* ===================== 📱スマホ最適化 ===================== */
+    /* 受講者の声カードに常時シャドウ＋ホバー強調 */
+    #voice .info-card {
+      background: white;
+      border-radius: 0.75rem;
+      border-left: 4px solid var(--light-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #voice .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.15); /* ←ホバー時は少し強い青みの影 */
+    }
+
+    /* ============== ▼ ここから追記（見た目は崩さず動きだけ） ============== */
+
+    /* === 受講者の声：中央基準＆見切れ防止 === */
+    #voice .voice-slider-root {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    #voice .voice-track {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      width: max-content;
+      padding-left: 1rem;  /* ← 左余白 */
+      padding-right: 1rem; /* ← 右余白 */
+      box-sizing: border-box;
+    }
+
+    #voice .voice-item {
+      flex: 0 0 auto;
+      width: 27vw;      /* ← 25vw → 23.5vw に変更 */
+      max-width: 27vw;  /* ← 同じ値で固定 */
+      min-width: 260px;   /* ← モバイルで小さくなりすぎないよう保険 */
+      box-sizing: border-box;
+    }
+
+
     @media (max-width: 768px) {
-      .br-sp { display: block; }
+      #voice .voice-item {
+        width: 80vw;
+        max-width: 80vw;
+      }
+    }
 
+    /* ===================== 📱スマホ専用・CTAワープ完全修正版 ===================== */
+    @media (max-width: 768px) {
+
+      /* --- 改行 --- */
+      .br-sp {
+        display: block;
+      }
+
+      /* --- Heroセクション --- */
+      #hero {
+        padding-top: 6rem !important;
+        padding-bottom: 4rem !important;
+      }
+      #hero h1 {
+        font-size: 1.9rem;
+        line-height: 1.35;
+      }
+      #hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.8rem;
+      }
+
+      /* --- 呼吸アニメをスマホでも滑らかに動かす（transform競合解消） --- */
       #hero .cta-btn,
       #pricing .cta-btn,
       #cta .cta-btn {
         font-size: 0.9rem;
         padding: 0.8rem 2rem;
-        margin: 1.2rem auto !important;
+        margin: 1.2rem auto !important; /* ← 上下余白を揃える */
         width: fit-content;
-        animation: none; /* ← 初期状態では止める */
+        animation: none; /* ← フェード前は呼吸止める */
+      }
+    
+      #hero .cta-btn,
+      #pricing .cta-btn,
+      #cta .cta-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        animation: none;
+        will-change: transform, opacity;
+      }
+
+      /* --- フェード後に呼吸アニメを再始動 --- */
+      .fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition-delay: 0.05s;
+      }
+      .fade-in.shine-start {
+        animation: breathe 4.5s ease-in-out infinite;
+      }
+
+      /* --- 特徴 --- */
+      #reason {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+
+      /* --- 料金 --- */
+      #pricing {
+        padding-top: 3.5rem !important;
+        padding-bottom: 4rem !important;
+      }
+
+      /* ✅ スマホ専用：料金CTAのフォントサイズ調整 */
+      #pricing .cta-btn {
+        font-size: 0.85rem !important; /* ← ここで改行防止 */
+        padding: 0.8rem 1.8rem;
+        white-space: nowrap;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+
+      /* --- 受講者の声 --- */
+      #voice .voice-item {
+        width: 80vw !important;
+        max-width: 80vw !important;
+      }
+
+      /* --- 最終CTA --- */
+      #cta {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+      }
+      #cta h2 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+      }
+      #cta p {
+        font-size: 1rem;
+        line-height: 1.6;
+        width: 90%;
+        margin: 0.5rem auto 1.5rem;
+      }
+
+      /* --- 全体 --- */
+      section {
+        padding-top: 2.8rem !important;
+        padding-bottom: 2.8rem !important;
       }
     }
+
+    
   </style>
 </head>
 
@@ -195,8 +397,10 @@
     <h1 class="text-5xl font-extrabold mb-6">
       ゼロからでも安心。<span class="br-sp"></span>案件を取れる編集力を！
     </h1>
-    <p class="text-xl mb-10">ー最短で現場レベルのスキルを手に入れる～</p>
-    <a href="https://mail.google.com/" target="_blank">
+    <p class="text-xl mb-10">
+      ～最短で現場レベルのスキルを手に入れる～
+    </p>
+    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
   </section>
@@ -207,8 +411,8 @@
       <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">Movie Fitが選ばれる理由</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">未経験でも安心</h3><p>基礎から実務レベルまで体系的に学べるカリキュラムを用意。</p></div>
-        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">案件獲得サポート</h3><p>卒業後も活躍できるように営業サポートを用意。</p></div>
-        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">仲間と学べる</h3><p>コミュニティで情報交換しながら楽しく学習できます。</p></div>
+        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">案件獲得サポート</h3><p>卒業後も活躍できるように、案件獲得の営業サポート付き。</p></div>
+        <div class="info-card p-8"><h3 class="text-2xl font-bold text-blue-800 mb-3">仲間と学べる</h3><p>コミュニティで情報交換しながら楽しく学習を進められます。</p></div>
       </div>
     </div>
   </section>
@@ -218,44 +422,44 @@
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-8 border-b-4 border-blue-300 inline-block pb-2">受講料金</h2>
       <p class="text-gray-700 mb-6 font-semibold text-lg">今だけの特別価格で受講できます</p>
-      <div class="bg-white shadow-xl rounded-2xl border-2 border-blue-300 p-10 inline-block flex flex-col items-center">
+      <div class="bg-white shadow-xl rounded-2xl border-2 border-blue-300 p-10 inline-block">
         <p class="text-2xl text-gray-400 line-through mb-2">通常価格 150,000円</p>
         <div class="mb-8 relative inline-block">
           <span class="price-3d">10万円</span>
           <div class="gold-line"></div>
         </div>
         <p class="text-gray-700 font-semibold">手数料なしで分割払いも可能<br>（3回 / 6回 / 12回）</p>
-        <a href="https://mail.google.com/" target="_blank">
+        <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
           <button class="cta-btn">今すぐ申し込む！</button>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 受講者の声 -->
+  <!-- 受講者の声（ベース構造はそのまま／動的にスライダー化） -->
   <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">受講者の声</h2>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「未経験から始めて3ヶ月で案件を受注！」</p><p class="font-bold text-blue-900">30代男性 / 営業職</p></div>
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「仲間と一緒に学べて継続できました！」</p><p class="font-bold text-blue-900">20代女性 / フリーター</p></div>
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「実践的な内容が多く副業収入アップ！」</p><p class="font-bold text-blue-900">40代男性 / 会社員</p></div>
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「未経験から始めて、3ヶ月で案件を受注できました！」</p><p class="font-bold text-blue-900">30代男性 / 営業職</p></div>
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「仲間と一緒に学べるのが楽しくて継続できました！」</p><p class="font-bold text-blue-900">20代女性 / フリーター</p></div>
+        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「実践的な内容が多く、副業で収入アップにつながりました！」</p><p class="font-bold text-blue-900">40代男性 / 会社員</p></div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ（ベース構造はそのまま） -->
   <section id="faq" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-10 border-b-4 border-blue-300 inline-block pb-2">よくある質問</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-10 text-center border-b-4 border-blue-300 inline-block pb-2">よくある質問</h2>
       <div class="space-y-8">
         <div class="info-card p-6 text-left">
           <h3 class="text-xl font-semibold text-blue-800 mb-2">Q. 未経験でも大丈夫ですか？</h3>
-          <p class="text-gray-700">はい、基礎から丁寧に学べるので安心です。</p>
+          <p class="text-gray-700">はい、基礎から丁寧に解説するので未経験の方でも安心です。</p>
         </div>
         <div class="info-card p-6 text-left">
           <h3 class="text-xl font-semibold text-blue-800 mb-2">Q. 分割払いは手数料かかりますか？</h3>
-          <p class="text-gray-700">いいえ、手数料なしで3・6・12回払いが可能です。</p>
+          <p class="text-gray-700">いいえ、手数料なしで3回 / 6回 / 12回払いをご利用いただけます。</p>
         </div>
       </div>
     </div>
@@ -263,17 +467,43 @@
 
   <!-- 最終CTA -->
   <section id="cta" class="hero text-white text-center py-24 px-6 fade-section">
-    <h2 class="text-4xl font-bold mb-6">あなたも動画編集を<span class="br-sp"></span>始めませんか？</h2>
-    <p class="text-xl mb-10">～案件獲得まで最短で～</p>
-    <a href="https://mail.google.com/" target="_blank">
+    <h2 class="text-4xl font-bold mb-6">
+      あなたも動画編集を<span class="br-sp"></span>始めませんか？
+    </h2>
+    <p class="text-xl mb-10">
+      ～案件獲得まで最短で～
+    </p>
+    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank">
       <button class="cta-btn">今すぐ申し込む！</button>
     </a>
   </section>
-
   <footer><p class="text-sm">&copy; 2025 Movie Fit All Rights Reserved.</p></footer>
 
   <script>
-    // CTAボタンのフェード＋shine再実行＋スマホ呼吸再開
+    // =====================
+    // 🎞 セクションフェード（再表示時も再実行）
+    // =====================
+    const fadeSections = document.querySelectorAll(".fade-section");
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          const price = entry.target.querySelector(".price-3d");
+          if (price) {
+            price.classList.remove("show");
+            void price.offsetWidth;
+            price.classList.add("show");
+          }
+        } else {
+          entry.target.classList.remove("visible");
+        }
+      });
+    }, { threshold: 0.3 });
+    fadeSections.forEach(sec => fadeObserver.observe(sec));
+
+    // =====================
+    // ✨ CTAボタンフェード＋shine再実行（スマホのワープ防止＋呼吸復活付き）
+    // =====================
     const ctaButtons = document.querySelectorAll('.cta-btn');
     const ctaObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -284,12 +514,15 @@
           if (btn.closest('#cta')) delay = 700;
 
           setTimeout(() => {
+            // フェードイン開始
             btn.classList.add('fade-in');
+
+            // Shineエフェクト生成
             const shine = document.createElement('span');
             shine.className = 'shine';
             btn.appendChild(shine);
 
-            // 📱スマホ時はフェード後に呼吸アニメを再開
+            // 💡PCは従来通り、スマホはフェード後に呼吸アニメ再開
             if (window.innerWidth <= 768) {
               setTimeout(() => {
                 btn.classList.add('shine-start');
@@ -297,14 +530,183 @@
               }, 600);
             }
 
+            // Shine終了後に自動削除
             shine.addEventListener('animationend', () => shine.remove(), { once: true });
+
           }, delay);
         } else {
+          // ビュー外に出たらフェード・shineリセット
           btn.classList.remove('fade-in', 'shine-start');
+          // 呼吸アニメはスマホでは一旦止める
+          if (window.innerWidth <= 768) {
+            btn.style.animation = 'none';
+          }
         }
       });
     }, { threshold: 0.6 });
+
     ctaButtons.forEach(btn => ctaObserver.observe(btn));
+
+    // =====================
+    // 🧩 受講者の声：3枚表示・1枚ずつ横スライド（継ぎ目なし）※HTML構造は変更せずJSで変換
+    // =====================
+    (function initVoiceSlider() {
+      const section = document.querySelector('#voice');
+      if (!section) return;
+      const grid = section.querySelector('.grid');
+      if (!grid) return;
+
+      // 元の子要素（カード）を配列化
+      const cards = Array.from(grid.children);
+
+      if (cards.length === 0) return;
+
+      // ラッパ生成（元の grid を root として使い、中に track を入れる）
+      grid.classList.add('voice-slider-root');
+      grid.style.display = 'block';           // コンテナ化
+      grid.style.overflow = 'hidden';         // はみ出し隠す
+      grid.style.position = 'relative';
+
+      // track 生成してカードを移動
+      const track = document.createElement('div');
+      track.className = 'voice-track';
+      // gap-8 相当（2rem）と info-card の見た目を維持
+      track.style.alignItems = 'stretch';
+
+      // 1セット目を追加
+      cards.forEach(card => {
+        const wrap = document.createElement('div');
+        wrap.className = 'voice-item';
+        wrap.appendChild(card.cloneNode(true));
+        track.appendChild(wrap);
+      });
+      // シームレス用に2セット目も追加（複製）
+      cards.forEach(card => {
+        const wrap = document.createElement('div');
+        wrap.className = 'voice-item';
+        wrap.appendChild(card.cloneNode(true));
+        track.appendChild(wrap);
+      });
+
+      // grid の中身を置き換え
+      grid.innerHTML = '';
+      grid.appendChild(track);
+
+      // スライド設定
+      const BREAK_MD = 768; // Tailwind md 以上で3枚、それ未満で1枚（元デザイン準拠）
+      let visible = (window.innerWidth >= BREAK_MD) ? 3 : 1;
+      let index = 0;
+      let itemWidth = 0;
+      let gapPx = 32; // gap-8 = 2rem ≒ 32px（Tailwindの既存デザインを踏襲）
+
+      // 幅計測
+      function measure() {
+        const firstItem = track.querySelector('.voice-item');
+        if (!firstItem) return;
+
+        const screenWidth = window.innerWidth;
+        const gapPx = 32; // gap-8 = 2rem
+        visible = (screenWidth >= BREAK_MD) ? 3 : 1;
+        itemWidth = firstItem.offsetWidth + gapPx;
+
+        // ★ 初期位置補正（中央寄せ＋右欠け防止）
+        const rootPaddingLeft = parseFloat(getComputedStyle(grid).paddingLeft) || 0;
+        track.style.transform = `translateX(${rootPaddingLeft}px)`;
+
+        // 位置リセット
+        index = 0;
+        track.style.transition = 'none';
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 600ms ease';
+        });
+      }
+
+      measure();
+      window.addEventListener('resize', () => {
+        // レイアウトが安定してから再計測
+        clearTimeout(window.__voiceResizeTimer);
+        window.__voiceResizeTimer = setTimeout(measure, 200);
+      });
+
+      // 自動スライド
+      const total = cards.length;         // オリジナル枚数
+      const loopLen = total;              // 1周＝オリジナル分
+      const intervalMs = 3000;            // 1枚送る間隔（必要に応じて調整可）
+
+      function slideOnce() {
+        index += 1; // 1枚ずつ
+        track.style.transition = 'transform 600ms ease';
+        track.style.transform = `translateX(${-index * itemWidth}px)`;
+
+        // 先頭セットを超えたら瞬時にリセット（継ぎ目なし）
+        if (index >= loopLen) {
+          // アニメーション終了後に瞬間戻し
+          setTimeout(() => {
+            track.style.transition = 'none';
+            index = 0;
+            track.style.transform = 'translateX(0px)';
+            // 次フレームでトランジション復帰
+            requestAnimationFrame(() => {
+              track.style.transition = 'transform 600ms ease';
+            });
+          }, 650);
+        }
+      }
+
+      let timer = setInterval(slideOnce, intervalMs);
+
+      // 画面に見えているときだけ動かす（パフォーマンス）
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            if (!timer) timer = setInterval(slideOnce, intervalMs);
+          } else {
+            clearInterval(timer);
+            timer = null;
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(section);
+    })();
+
+    // =====================
+    // ❓ FAQ：クリックで開閉（他を閉じる＋ふわっとアニメ付き）
+    // =====================
+    (function initFAQToggle() {
+      const faq = document.querySelector('#faq');
+      if (!faq) return;
+      const cards = faq.querySelectorAll('.info-card');
+
+      cards.forEach(card => {
+        const answer = card.querySelector('p.text-gray-700');
+        if (!answer) return;
+
+        // 初期状態：閉じる
+        answer.style.maxHeight = '0';
+        answer.style.overflow = 'hidden';
+        answer.style.transition = 'max-height 0.4s ease, opacity 0.4s ease';
+        answer.style.opacity = '0';
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', (ev) => {
+          if (ev.target.tagName.toLowerCase() === 'a') return;
+          const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '0';
+
+          // 全ての回答を閉じる
+          faq.querySelectorAll('.info-card p.text-gray-700').forEach(p => {
+            p.style.maxHeight = '0';
+            p.style.opacity = '0';
+          });
+
+          // 今クリックした要素が閉じていた場合のみ開く
+          if (!isOpen) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.opacity = '1';
+          }
+        });
+      });
+    })();
+
   </script>
 </body>
 </html>
