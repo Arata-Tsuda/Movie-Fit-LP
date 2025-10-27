@@ -386,20 +386,20 @@
 
       /* ===================== 🎨 チルダ演出最適化 ===================== */
       /* --- 最終CTA共通 --- */
+      
       .cta-subcopy {
-        font-size: 1.25rem;
-        line-height: 1.8;
-        color: #ffffff;
-        text-align: center;
-        display: block;
-        opacity: 0.95;
-        text-shadow:
-          0 0 6px rgba(255, 255, 255, 0.25),
-          0 1px 4px rgba(0, 0, 0, 0.25);
-        letter-spacing: 0.02em;
-        margin-bottom: 1.5rem;
-　　　　}
-
+	  font-size: 1.25rem;
+	  line-height: 1.8;
+	  color: #ffffff;
+	  text-align: center;
+	  display: block;
+	  opacity: 0.95;
+	  text-shadow:
+	    0 0 6px rgba(255, 255, 255, 0.25),
+	    0 1px 4px rgba(0, 0, 0, 0.25);
+	  letter-spacing: 0.02em;
+	  margin-bottom: 1.5rem;
+	  }
       /* ---- 共通（PC） ---- */
       .hero-subcopy,
       .cta-subcopy {
@@ -438,23 +438,19 @@
 
      /* --- 最終CTA：スマホ --- */
      @media (max-width: 768px) {
-       .cta-subcopy {
-         display: none; /* ← 重複防止 */
-       }
-       .cta-subcopy::before {
-         content: "～ゼロから案件が取れる自分へ～";
-         display: block;
-         font-size: 1rem;
-         line-height: 1.6;
-         text-align: center;
-         color: #ffffff;
-         opacity: 0.95;
-         text-shadow:
-           0 0 6px rgba(255, 255, 255, 0.25),
-           0 1px 4px rgba(0, 0, 0, 0.25);
-         letter-spacing: 0.02em;
-       }
-     }
+        .cta-subcopy {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #ffffff;
+          text-align: center;
+          opacity: 0.95;
+          text-shadow:
+            0 0 6px rgba(255, 255, 255, 0.25),
+            0 1px 4px rgba(0, 0, 0, 0.25);
+          letter-spacing: 0.02em;
+          margin-bottom: 1.2rem;
+        }
+      }
 
       /* --- 全体 --- */
       section {
