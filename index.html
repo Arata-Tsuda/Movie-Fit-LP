@@ -384,7 +384,7 @@
         margin: 0.5rem auto 1.5rem;
       }
       
-      /* ===================== 📱スマホでスワイプ横スクロール（左寄せ＋次のカードが覗く修正版） ===================== */
+      /* ===================== 📱スマホでスワイプ横スクロール（左寄せ＋強め覗き込み） ===================== */
       @media (max-width: 768px) {
         #voice .voice-slider-root {
           overflow-x: auto;
@@ -393,14 +393,14 @@
           display: flex;
           gap: 1.5rem;
           padding-left: 1rem;
-          padding-right: 2rem; /* 👈 少し右に余白をとって覗きスペースを確保 */
+          padding-right: 2.5rem; /* 最後のカードが切れないように少し余裕を確保 */
           padding-bottom: 1rem;
         }
 
         #voice .voice-item {
-          scroll-snap-align: center; /* 👈 左寄せっぽく見える中央寄せに変更（前が覗かない） */
-          flex: 0 0 80%; /* 👈 次のカードが少し覗く幅 */
-          max-width: 80%;
+          scroll-snap-align: center; /* 前のカードが覗かない */
+          flex: 0 0 70%; /* 👈 覗き具合を“強め”に調整（次のカードがしっかり見える） */
+          max-width: 70%;
           box-sizing: border-box;
           transition: transform 0.3s ease;
         }
