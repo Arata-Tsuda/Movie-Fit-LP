@@ -384,31 +384,39 @@
         margin: 0.5rem auto 1.5rem;
       }
       
-      /* ===================== 📱スマホでスワイプ横スクロール ===================== */
+      /* ===================== 📱スマホでスワイプ横スクロール（覗き込みあり） ===================== */
       @media (max-width: 768px) {
         #voice .voice-slider-root {
           overflow-x: auto;
           scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch; /* スマホでスムーズにスワイプ */
+          -webkit-overflow-scrolling: touch; /* スマホのスムーズスクロール */
           display: flex;
           gap: 1.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
           padding-bottom: 1rem;
         }
 
         #voice .voice-item {
           scroll-snap-align: center;
-          flex: 0 0 85%; /* 横幅を少し大きめに確保して1枚ずつ見せる */
-          max-width: 85%;
+          flex: 0 0 80%; /* 👈 覗き込みあり（次のカードが少し見える） */
+          max-width: 80%;
           box-sizing: border-box;
+          transition: transform 0.3s ease;
         }
 
-        /* スクロールバーを非表示にする（iOS/Android対応） */
+        /* スクロールバー非表示（iOS/Android両対応） */
         #voice .voice-slider-root::-webkit-scrollbar {
           display: none;
         }
         #voice .voice-slider-root {
           -ms-overflow-style: none;
           scrollbar-width: none;
+        }
+
+        /* カードタップ時のわずかな拡大で視覚フィードバック */
+        #voice .voice-item:active {
+          transform: scale(0.98);
         }
       }
 
