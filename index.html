@@ -436,6 +436,33 @@
         }
       }
 
+     /* ======= 📱 FAQ スマホ最適化 ======= */
+     @media (max-width: 768px) {
+
+       /* カードの余白調整 */
+       #faq .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+         margin-top: 1.25rem !important; /* 元:2rem → 1.25rem */
+       }
+
+       /* FAQ カード内のパディング縮小 */
+       #faq .info-card {
+         padding: 0.9rem 1rem !important; /* 元: p-6 → 約60%に縮小 */
+       }
+
+       /* 質問の文字サイズ縮小 */
+       #faq h3 {
+         font-size: 1rem !important;      /* 元: text-xl(1.25rem) → 1rem */
+         margin-bottom: 0.3rem !important;
+       }
+
+       /* 回答の文字サイズ & 行間縮小 */
+       #faq p.text-gray-700 {
+         font-size: 0.88rem !important;   /* 少し小さめ */
+         line-height: 1.45 !important;    /* 行間詰める */
+       }
+     }
+
+     
      /* --- 最終CTA：スマホ --- */
      @media (max-width: 768px) {
         .cta-subcopy {
