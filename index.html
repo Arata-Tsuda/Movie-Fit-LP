@@ -383,6 +383,35 @@
         width: 90%;
         margin: 0.5rem auto 1.5rem;
       }
+      
+      /* ===================== 📱スマホでスワイプ横スクロール ===================== */
+      @media (max-width: 768px) {
+        #voice .voice-slider-root {
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch; /* スマホでスムーズにスワイプ */
+          display: flex;
+          gap: 1.5rem;
+          padding-bottom: 1rem;
+        }
+
+        #voice .voice-item {
+          scroll-snap-align: center;
+          flex: 0 0 85%; /* 横幅を少し大きめに確保して1枚ずつ見せる */
+          max-width: 85%;
+          box-sizing: border-box;
+        }
+
+        /* スクロールバーを非表示にする（iOS/Android対応） */
+        #voice .voice-slider-root::-webkit-scrollbar {
+          display: none;
+        }
+        #voice .voice-slider-root {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      }
+
 
       /* ===================== 🎨 チルダ演出最適化 ===================== */
       /* --- 最終CTA共通 --- */
@@ -531,17 +560,69 @@
     </div>
   </section>
 
-  <!-- 受講者の声（ベース構造はそのまま／動的にスライダー化） -->
+  <!-- 受講者の声（10件） -->
   <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
     <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">受講者の声</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-12 border-b-4 border-blue-300 inline-block pb-2">
+        受講者の声
+      </h2>
+
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「未経験から始めて、3ヶ月で案件を受注できました！」</p><p class="font-bold text-blue-900">30代男性 / 営業職</p></div>
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「仲間と一緒に学べるのが楽しくて継続できました！」</p><p class="font-bold text-blue-900">20代女性 / フリーター</p></div>
-        <div class="info-card py-12 px-8"><p class="mb-4 text-gray-700">「実践的な内容が多く、副業で収入アップにつながりました！」</p><p class="font-bold text-blue-900">40代男性 / 会社員</p></div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「未経験から始めて、2日で“実践で使える編集”を理解できました。最初の案件もMovie Fitで学んだ通りに進められました！」</p>
+          <p class="font-bold text-blue-900">20代男性 / 学生</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「これまで独学で迷走していましたが、“案件を取るための編集”が明確になり、初めて営業メッセージから契約できました！」</p>
+          <p class="font-bold text-blue-900">30代女性 / 主婦</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「動画編集を副業にしたくて受講。営業テンプレが超実用的で、初月で3万円の案件を2件受注できました！」</p>
+          <p class="font-bold text-blue-900">20代男性 / 会社員</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「2日間で学びきれるボリュームがちょうどよく、挫折せずにやりきれました！現場感覚のある教材でした。」</p>
+          <p class="font-bold text-blue-900">30代女性 / 広報職</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「卒業後のコミュニティで案件が流れてきて、仲間と一緒に受注できました。孤独にならず続けられるのが最高です！」</p>
+          <p class="font-bold text-blue-900">20代女性 / フリーランス</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「講師の方の実体験ベースの説明がすごくリアル。実務に直結する部分だけを丁寧に教えてくれました。」</p>
+          <p class="font-bold text-blue-900">40代男性 / 映像関連会社勤務</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「営業が苦手でしたが、“提案文テンプレ”で一気にハードルが下がりました。初案件の返信率が3倍になりました！」</p>
+          <p class="font-bold text-blue-900">30代男性 / 会社員</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「案件を取ることにフォーカスした構成なので、学んで終わりにならず、すぐ実践につなげられました。」</p>
+          <p class="font-bold text-blue-900">20代女性 / アルバイト</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「フリーでやってきたけど、自分のやり方に限界を感じて受講。体系的に学び直せて、作業効率も倍になりました！」</p>
+          <p class="font-bold text-blue-900">30代男性 / フリーランス</p>
+        </div>
+
+        <div class="info-card py-12 px-8">
+          <p class="mb-4 text-gray-700">「Movie Fitのサポートは“熱量”が違いました。スキルだけじゃなく、動画編集者としての考え方も身につきました。」</p>
+          <p class="font-bold text-blue-900">40代女性 / 副業希望</p>
+        </div>
+
       </div>
     </div>
   </section>
+
 
   <!-- FAQ（ベース構造はそのまま） -->
   <section id="faq" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
