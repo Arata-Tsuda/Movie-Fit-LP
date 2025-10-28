@@ -385,40 +385,6 @@
       }
       
       /* ===================== 📱スマホでスワイプ横スクロール（左寄せ＋強め覗き込み） ===================== */
-      @media (max-width: 768px) {
-        #voice .voice-slider-root {
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-          display: flex;
-          gap: 1.5rem;
-          padding-left: 1rem;
-          padding-right: 2.5rem; /* 最後のカードが切れないように少し余裕を確保 */
-          padding-bottom: 1rem;
-        }
-
-        #voice .voice-item {
-          scroll-snap-align: center; /* 前のカードが覗かない */
-          flex: 0 0 70%; /* 👈 覗き具合を“強め”に調整（次のカードがしっかり見える） */
-          max-width: 70%;
-          box-sizing: border-box;
-          transition: transform 0.3s ease;
-        }
-
-        /* スクロールバー非表示（iOS/Android両対応） */
-        #voice .voice-slider-root::-webkit-scrollbar {
-          display: none;
-        }
-        #voice .voice-slider-root {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-
-        /* タップ時の軽いアニメーション */
-        #voice .voice-item:active {
-          transform: scale(0.98);
-        }
-      }
 
 
       /* ===================== 🎨 チルダ演出最適化 ===================== */
