@@ -210,7 +210,8 @@
       margin-bottom: 1.5rem;
     }
     
-    /* ===================== ✨ 新FAQデザイン ===================== */
+    /* ===================== ✨ 新FAQ（開閉色統一U1×D2／自然F1／複数OK） ===================== */
+
     .faq-list {
       display: flex;
       flex-direction: column;
@@ -218,66 +219,99 @@
     }
 
     .faq-item {
-      border: 1.5px solid #AFCBFF;
+      border: 1.5px solid #AFCBFF; /* 閉：薄青 */
       border-radius: 10px;
       background: white;
       transition: border-color 0.3s ease;
     }
 
-    /* 開いた時のみ少し濃くして強調（背景は変えない） */
     .faq-item.active {
-      border-color: #7EB0FF;
+      border-color: #1E3A8A; /* 開：濃紺 */
     }
 
     .faq-question {
       width: 100%;
       background: transparent;
       border: none;
-      padding: 0.9rem 1.1rem;
-      font-size: 1.05rem;
+      padding: 0.85rem 0.9rem;
+      font-size: 1.02rem;
       font-weight: 600;
       color: #1e3a8a;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
       cursor: pointer;
     }
 
-    .faq-icon {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
+    .faq-q-label {
+      color: #1e3a8a;
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+
+    .faq-title {
+      flex: 1;
+      text-align: left;
+      color: #1e3a8a;
+    }
+
+    /* 丸＋／－（CIR1×S×R2） */
+    .faq-icon-wrap {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #AFCBFF; /* 閉：薄青 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem; /* T2標準 */
+      line-height: 1;
+      color: #AFCBFF; /* 閉：薄青 */
+      margin-left: 10px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon-wrap {
+      border-color: #09328F; /* 開：濃紺 */
+      color: #09328F;        /* 開：濃紺 */
+    }
+
+    /* A：の見た目（A-S1） */
+    .faq-a-label {
+      font-weight: 700;
+      margin-right: 0.25rem;
+      color: #1e3a8a;
     }
 
     .faq-answer {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      padding: 0 1.1rem;
-      transition: max-height 0.35s ease, opacity 0.35s ease;
+      padding: 0 0.9rem;
+      transform: translateY(-4px);
+      transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .faq-answer.open {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .faq-answer p {
-      font-size: 0.95rem;
-      line-height: 1.55;
+      font-size: 0.92rem;
+      line-height: 1.52;
       color: #444;
-      padding-bottom: 0.9rem;
+      padding: 0.55rem 0 0.9rem;
     }
 
-
-    /* 📱 スマホ最適化（縦圧縮） */
+    /* 📱 SP最適化（縦の圧縮） */
     @media (max-width: 768px) {
-      .faq-question {
-        padding: 0.72rem 0.9rem;
-        font-size: 0.97rem;
-      }
-      .faq-answer p {
-        font-size: 0.88rem;
-        line-height: 1.42;
-        padding-bottom: 0.7rem;
-      }
-      .faq-list {
-        gap: 0.75rem;
-      }
+      .faq-list { gap: 0.7rem; }
+      .faq-question { padding: 0.7rem 0.75rem; font-size: 0.95rem; }
+      .faq-answer p { font-size: 0.86rem; line-height: 1.38; padding-bottom: 0.6rem; }
     }
 
 
@@ -666,7 +700,7 @@
     </div>
   </section>
 
-  <!-- ✅ 新FAQ（上品×省スペース×矢印アコーディオン） -->
+  <!-- ✅ FAQ（Q＋A：＋丸＋／－右端／複数開きOK／自然アニメ／枠とアイコン色統一） -->
   <section id="faq" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-10 text-center border-b-4 border-blue-300 inline-block pb-2">
@@ -675,74 +709,80 @@
 
       <div class="faq-list">
 
-        <!-- FAQ Item -->
         <div class="faq-item">
           <button class="faq-question">
-            <span>未経験でも大丈夫ですか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">未経験でも大丈夫ですか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>はい、基礎から丁寧に解説するので未経験でも安心してスタートできます。</p>
+            <p><span class="faq-a-label">A：</span>はい、基礎から丁寧に解説するので未経験でも安心してスタートできます。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>本業や子育てと両立できますか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">本業や子育てと両立できますか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>忙しい方でも進めやすい構成になっており、スキマ時間で学べるカリキュラムです。</p>
+            <p><span class="faq-a-label">A：</span>忙しい方でも進めやすい構成になっており、スキマ時間で学べるカリキュラムです。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>パソコンやソフトは何が必要ですか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">パソコンやソフトは何が必要ですか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>推奨スペックや必要ソフトは、受講前に公式LINEで気軽にご相談いただけます。</p>
+            <p><span class="faq-a-label">A：</span>推奨スペックや必要ソフトは、受講前に公式LINEで気軽にご相談いただけます。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>金額が不安なのですが、分割できますか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">金額が不安なのですが、分割できますか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>はい、手数料なしで 3回 / 6回 / 12回払いが可能なので、無理なく始められます。</p>
+            <p><span class="faq-a-label">A：</span>はい、手数料なしで 3回 / 6回 / 12回払いが可能なので、無理なく始められます。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>どれくらいの期間で編集できるようになりますか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">どれくらいの期間で編集できるようになりますか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>個人差はありますが、最短2日で現場レベルの編集ができるよう設計されています。<br>ライブ授業で一気にやり切る仕組みがあるため、迷わず習得できます。</p>
+            <p><span class="faq-a-label">A：</span>個人差はありますが、最短2日で現場レベルの編集ができるよう設計されています。ライブ授業で一気にやり切る仕組みがあるため、迷わず習得できます。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>案件サポートはどこまでしてくれますか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">案件サポートはどこまでしてくれますか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>営業文テンプレートや提案のコツを実践的に学べます。<br>希望者向けには、提案内容のフィードバックも受けられるサポートがあります。</p>
+            <p><span class="faq-a-label">A：</span>営業文テンプレートや提案のコツを実践的に学べます。希望者向けには、提案内容のフィードバックも受けられるサポートがあります。</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>卒業後も相談できますか？</span>
-            <span class="faq-icon">＞</span>
+            <span class="faq-q-label">Q</span>
+            <span class="faq-title">卒業後も相談できますか？</span>
+            <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p>はい、卒業後も継続して学べるコミュニティをご用意しています。<br>スキルアップや情報共有を通して、成長を続けられる環境です。</p>
+            <p><span class="faq-a-label">A：</span>はい、卒業後も継続して学べるコミュニティをご用意しています。スキルアップや情報共有を通して、成長を続けられる環境です。</p>
           </div>
         </div>
 
@@ -969,8 +1009,8 @@
       io.observe(section);
     })();
 
-   // ===================== ❓ 新FAQアコーディオン（＋／－版） =====================
-   (function initNewFAQPlusMinus() {
+   // ===================== ❓ FAQ（複数開きOK／自然F1アニメ） =====================
+   (function initFAQ() {
      const items = document.querySelectorAll('.faq-item');
 
      items.forEach(item => {
@@ -981,20 +1021,18 @@
        btn.addEventListener('click', () => {
          const isOpen = item.classList.contains('active');
 
-         // 全て閉じる
-         items.forEach(i => {
-           i.classList.remove('active');
-           i.querySelector('.faq-answer').style.maxHeight = 0;
-           i.querySelector('.faq-answer').style.opacity = 0;
-           i.querySelector('.faq-icon').textContent = '＋';
-         });
-
-         // クリックしたものを開く
          if (!isOpen) {
            item.classList.add('active');
-           ans.style.maxHeight = ans.scrollHeight + 'px';
-           ans.style.opacity = 1;
            icon.textContent = '－';
+
+           ans.style.maxHeight = ans.scrollHeight + 'px';
+           ans.classList.add('open');
+         } else {
+           item.classList.remove('active');
+           icon.textContent = '＋';
+
+           ans.style.maxHeight = 0;
+           ans.classList.remove('open');
          }
        });
      });
