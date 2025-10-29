@@ -300,12 +300,23 @@
       transform: translateY(0);
     }
 
+    /* A：の後の文章を綺麗に揃える（S2：text-indent方式） */
     .faq-answer p {
       font-size: 0.92rem;
       line-height: 1.52;
       color: #444;
       padding: 0.55rem 0 0.9rem;
+
+      padding-left: 1.7rem;   /* 1行目以外の左余白 */
+      text-indent: -1.7rem;   /* 1行目だけ戻す（A：分） */
     }
+
+    .faq-a-label {
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-right: 0.25rem;
+    }
+
 
     /* 📱 SP最適化（縦の圧縮） */
     @media (max-width: 768px) {
