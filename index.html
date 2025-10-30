@@ -363,6 +363,60 @@
       box-shadow: 0 8px 20px rgba(30,64,175,0.15); /* ←ホバー時は少し強い青みの影 */
     }
 
+    /* ===== LINE 相談ボタン ===== */
+    .line-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--main-blue);
+      border: 2px solid var(--mid-blue);
+      background: white;
+      padding: 0.7rem 2rem;
+      border-radius: 9999px;
+      transition: 0.3s ease;
+    }
+
+    .line-btn:hover {
+      background: var(--light-blue);
+      color: white;
+      box-shadow: 0 6px 14px rgba(30, 64, 175, 0.18);
+    }
+
+    /* スマホ最適化 */
+    @media (max-width: 768px) {
+      #line-consult {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      .line-btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.6rem;
+      }
+    }
+
+    /* ===== LINEアイコン（細線） ===== */
+    .line-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 0.5rem;
+      stroke: var(--mid-blue);
+      stroke-width: 2;
+    }
+
+
+    /* 外部リンク矢印 */
+    .ext-icon {
+      width: 14px;
+      height: 14px;
+      stroke: var(--mid-blue);
+      stroke-width: 2;
+    }
+
+    
     /* ============== ▼ ここから追記（見た目は崩さず動きだけ） ============== */
 
     /* === 受講者の声：中央基準＆見切れ防止 === */
@@ -647,6 +701,36 @@
       </div>
     </div>
   </section>
+  
+  
+  <!-- LINE相談（ミニCTA） -->
+  <section id="line-consult" class="py-8 px-6 fade-section">
+    <div class="max-w-3xl mx-auto flex flex-col items-center text-center border border-blue-200 rounded-2xl bg-white/90 shadow-sm p-8">
+      <h3 class="text-xl font-bold text-blue-800 mb-3">
+        申込前に不安や疑問があればご相談ください
+      </h3>
+      <p class="text-gray-600 text-sm mb-5 leading-relaxed">
+        PCスペック・相性・進め方など、どんなことでもお気軽にどうぞ。
+      </p>
+
+      <a href="https://line.me/ti/p/xxxx" target="_blank">
+        <button class="line-btn flex items-center justify-center gap-2">
+          <svg class="line-icon" fill="none" viewBox="0 0 24 24">
+            <path d="M4 6c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v9.5c0 1.1-.9 2-2 2h-5l-3.5 3.5c-.6.6-1.5.2-1.5-.6V17.5H6a2 2 0 0 1-2-2V6Z" />
+          </svg>
+
+          LINEで無料相談
+        </button>
+      </a>
+
+      <p class="text-gray-400 text-xs mt-2">
+        ※ 無料。強引な勧誘は一切ありません。
+      </p>
+
+
+    </div>
+  </section>
+
 
   <!-- 受講者の声（10件） -->
   <section id="voice" class="bg-gradient-to-b from-blue-50 to-white py-20 px-6 fade-section">
@@ -771,7 +855,7 @@
             <span class="faq-icon-wrap"><span class="faq-icon">＋</span></span>
           </button>
           <div class="faq-answer">
-            <p><span class="faq-a-label">A：</span>個人差はありますが、最短2日で現場レベルの編集ができるよう設計されています。ライブ授業で一気にやり切る仕組みもあるため、迷わず習得できます。</p>
+            <p><span class="faq-a-label">A：</span>個人差はありますが、最短2日で現場レベルの編集ができるよう設計されています。ライブ授業で一気にやり切る仕組みがあるため、迷わず習得できます。</p>
           </div>
         </div>
 
