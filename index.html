@@ -1180,31 +1180,41 @@
 
 
   <footer class="bg-[#0f1e46] text-white py-6 mt-0">
-    <div class="max-w-6xl mx-auto px-4 text-xs flex flex-col gap-2">
+    <div class="max-w-6xl mx-auto px-4">
 
-      <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+      <!-- スマホ：コピーライト（上段中央） -->
+      <p class="text-xs opacity-80 text-center mb-3 md:hidden">
+        © 2025 MovieFit All Rights Reserved.
+      </p>
 
-        <!-- 規約リンク -->
-        <div class="grid grid-cols-2 gap-y-1 text-left md:flex md:flex-nowrap md:gap-6 md:text-left md:grid-cols-none md:gap-y-0">
+      <!-- スマホ：規約リンク（2×2グリッド） -->
+      <div class="grid grid-cols-2 gap-y-0 tracking-tight leading-tight text-left text-xs md:hidden mb-2">
+        <a href="【利用規約URL】" class="hover:underline whitespace-nowrap">利用規約</a>
+        <a href="【プライバシーURL】" class="hover:underline whitespace-nowrap">プライバシーポリシー</a>
+        <a href="【特商URL】" class="hover:underline whitespace-nowrap">特商法表記</a>
+        <a href="【お問い合わせURL】" class="hover:underline whitespace-nowrap">お問い合わせ</a>
+      </div>
+
+      <!-- PC：横並びフレックス -->
+      <div class="hidden md:flex justify-between items-center text-xs">
+
+        <!-- 左：規約リンク -->
+        <div class="flex gap-6">
           <a href="【利用規約URL】" class="hover:underline whitespace-nowrap">利用規約</a>
           <a href="【プライバシーURL】" class="hover:underline whitespace-nowrap">プライバシーポリシー</a>
           <a href="【特商URL】" class="hover:underline whitespace-nowrap">特商法表記</a>
           <a href="【お問い合わせURL】" class="hover:underline whitespace-nowrap">お問い合わせ</a>
         </div>
 
-        <!-- コピーライト -->
-        <p class="text-xs opacity-80 mt-1 text-left md:text-right whitespace-nowrap md:mt-0">
+        <!-- 右：コピーライト -->
+        <p class="opacity-80 whitespace-nowrap">
           © 2025 MovieFit All Rights Reserved.
         </p>
+
       </div>
 
     </div>
   </footer>
-
-
-
-
-
 
 
   <script>
