@@ -857,7 +857,32 @@
         color: rgba(255,255,255,0.75) !important;
       }
 
-      
+      /* ===== 🛠 最終CTA微調整（違和感除去版） ===== */
+      @media (max-width: 768px) {
+
+        /* サブコピー → ボタン間を少し詰める */
+        #cta .cta-subcopy {
+          margin-bottom: 1.0rem !important;
+        }
+
+        /* ボタンサイズ Heroより “気持ち大きく” */
+        #cta .cta-btn {
+          font-size: 1.05rem !important;
+          padding: 1rem 2.4rem !important;
+        }
+
+        /* ※文言をもっと上へ */
+        #cta p.text-[10px] {
+          margin-top: 0.4rem !important;
+          margin-bottom: 0.4rem !important;
+        }
+
+        /* セクション高さを僅かに圧縮 */
+        #cta {
+          padding-bottom: 1.6rem !important;
+        }
+      }
+
     }
       
 
