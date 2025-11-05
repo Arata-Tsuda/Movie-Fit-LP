@@ -728,8 +728,123 @@
         margin-top: 0.8rem !important;
         margin-bottom: 0.8rem !important;
       }
-    }
+     /* ==============================
+      📌 最終CTA 余白最終調整（PC & SP）
+      ============================== */
+      @media (min-width: 769px) {
+        /* PC：セクションの上下余白を少し縮める */
+        #cta {
+          padding-top: 5.5rem !important;
+          padding-bottom: 5rem !important;
+        }
 
+        /* PC：ボタン周りの余白調整 */
+        #cta .cta-btn {
+          margin-top: 1.5rem !important;
+          margin-bottom: 0.8rem !important;
+        }
+
+        /* PC：※書きを少し上へ */
+        #cta .text-center p {
+          margin-top: -0.3rem !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* SP：セクション高さを少し圧縮 */
+        #cta {
+          padding-top: 2.8rem !important;
+          padding-bottom: 3rem !important;
+        }
+
+        /* SP：ボタンもう少しだけ下 */
+        #cta .cta-btn {
+          margin-top: 1.6rem !important;
+          margin-bottom: 0.2rem !important;
+        }
+
+        /* SP：※書きを気持ち上に寄せる */
+        #cta .text-center p {
+          margin-top: -0.2rem !important;
+        }
+      }
+
+      /* ===================== 📱スマホ版：コピー間隔圧縮 + ボタン位置 + 高さ調整 ===================== */
+      @media (max-width: 768px) {
+
+        /* Hero：見出しとサブ見出しの距離を詰める */
+        #hero h1 {
+          margin-bottom: 0.6rem !important;
+          line-height: 1.35 !important;
+        }
+
+        /* サブコピーを全体的に近づける */
+        #hero .hero-subcopy {
+          margin-top: 0.2rem !important;
+          margin-bottom: 1.0rem !important;
+          line-height: 1.45 !important;
+        }
+
+        /* Hero ボタン位置（少し下） */
+        #hero .cta-btn {
+          margin-top: 1.2rem !important;
+        }
+
+        /* Hero セクション高さ圧縮 */
+        #hero {
+          padding-top: 5rem !important;
+          padding-bottom: 2.6rem !important;
+        }
+
+        /* ========= 料金セクション ========= */
+
+        /* 料金：ボタンを少し上 */
+        #pricing .cta-btn {
+          margin-top: -0.2rem !important;
+          margin-bottom: 0.6rem !important;
+        }
+
+        /* 料金：セクション底余白少し減らす */
+        #pricing {
+          padding-bottom: 3.0rem !important;
+        }
+
+        /* ========= 最終CTA ========= */
+
+        /* ボタンを少し下げる */
+        #cta .cta-btn {
+          margin-top: 1.6rem !important;
+        }
+
+        /* サブコピー間隔圧縮 */
+        #cta .cta-subcopy {
+          margin-bottom: 1.0rem !important;
+          line-height: 1.45 !important;
+        }
+
+        /* ※規約テキストを少しだけ上へ */
+        #cta .text-center p {
+          margin-top: 0.6rem !important;
+          margin-bottom: 0.8rem !important;
+        }
+
+        /* セクション底余白 圧縮 */
+        #cta {
+          padding-bottom: 2.2rem !important;
+        }
+      }
+
+      /* ===================== 🖥 PC：Hero 余白少しだけ圧縮 ===================== */
+      @media (min-width: 1024px) {
+        #hero {
+          padding-top: 7rem !important;
+          padding-bottom: 5rem !important;
+        }
+      }
+
+    
+    }
+      
 
 
 
