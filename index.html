@@ -1610,25 +1610,29 @@
       const closeBtn = document.getElementById("close-modal");
       const openButtons = document.querySelectorAll(".cta-btn");
 
-      // 初期状態：非表示
+      // ✅ ページ読み込み時は確実に非表示
       modal.classList.add("hidden");
 
-      // すべてのCTAボタンで開く
+      // ✅ すべての「今すぐ申し込む！」ボタンで開く
       openButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
           modal.classList.remove("hidden");
+          document.body.style.overflow = "hidden"; // 背景スクロール防止
         });
       });
 
-      // 閉じるボタンで閉じる
+      // ✅ 閉じるボタンで閉じる
       closeBtn.addEventListener("click", () => {
         modal.classList.add("hidden");
+        document.body.style.overflow = ""; // スクロール再許可
       });
 
-      // モーダルの外側クリックでも閉じる
+      // ✅ モーダル外クリックで閉じる
       modal.addEventListener("click", (e) => {
         if (e.target === modal) {
           modal.classList.add("hidden");
+          document.body.style.overflow = "";
         }
       });
     });
