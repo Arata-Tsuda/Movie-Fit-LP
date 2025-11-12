@@ -900,38 +900,8 @@
         }
       }
 
-      /* ===== 💳 モーダルレイアウト調整（上切れ防止・スマホ対応） ===== */
-      #payment-modal {
-        display: flex;
-        align-items: flex-start; /* ← 上切れ防止。中央より少し下に配置 */
-        justify-content: center;
-        overflow-y: auto;
-        padding-top: 5vh; /* 上余白確保 */
-        padding-bottom: 5vh;
-      }
-
-      #payment-modal > div {
-        margin: auto;
-        max-height: 90vh;
-      }
-
-      /* スマホ時に画面全体で自然にスクロール */
-      @media (max-width: 768px) {
-        #payment-modal {
-          align-items: center;
-          padding: 1.5rem;
-        }
-      }
-
       /* ===== 💳 モーダルレイアウト調整（Hero・CTAでも共通） ===== */
-      #payment-modal {
-        display: flex;
-        align-items: flex-start; /* ← 上切れ防止 */
-        justify-content: center;
-        overflow-y: auto;
-        padding-top: 5vh;
-        padding-bottom: 5vh;
-      }
+ 
 
       #payment-modal > div {
         margin: auto;
@@ -946,6 +916,7 @@
         }
       }
 
+      #payment-modal.hidden { display: none !important; }
 
     }
       
