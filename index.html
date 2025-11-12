@@ -1605,32 +1605,32 @@
   </script>
 
   <script>
-    // ===== 💳 モーダル開閉（共通） =====
-    const modal = document.getElementById('payment-modal');
-    const closeModal = document.getElementById('close-modal');
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("payment-modal");
+      const closeBtn = document.getElementById("close-modal");
+      const openButtons = document.querySelectorAll(".cta-btn");
 
-    // すべての .cta-btn にモーダル開閉を紐付け
-    document.querySelectorAll('.cta-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // 上切れ防止
+      // 初期状態：非表示
+      modal.classList.add("hidden");
+
+      // すべてのCTAボタンで開く
+      openButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          modal.classList.remove("hidden");
+        });
       });
-    });
 
-    // 閉じる処理
-    closeModal.addEventListener('click', () => {
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    });
+      // 閉じるボタンで閉じる
+      closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
 
-    // 背景クリックで閉じる
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
+      // モーダルの外側クリックでも閉じる
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.add("hidden");
+        }
+      });
     });
   </script>
 
