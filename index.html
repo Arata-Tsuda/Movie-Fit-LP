@@ -1608,6 +1608,53 @@
         }
       });
     });
+    
+    
+  </script>
+  <script>
+  /* ==========================================================
+     🎬 MovieFit アフィリエイト対応（aff ID → Stripe連携）
+     ========================================================== */
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    /* -----------------------------
+       ① URLから aff を取得
+    ----------------------------- */
+    const params = new URLSearchParams(window.location.search);
+    const affId = params.get("aff");
+
+    /* -----------------------------
+       ② Stripe決済URLに付与する関数
+    ----------------------------- */
+    function buildStripeURL(baseUrl) {
+      if (!affId) return baseUrl; // affなし → そのまま
+      const url = new URL(baseUrl);
+      url.searchParams.set("client_reference_id", affId);
+      return url.toString();
+    }
+
+    /* -----------------------------
+       ③ Stripe決済リンク（4種類）
+    ----------------------------- */
+    const stripeLinks = {
+      one:  "https://buy.stripe.com/8x214p9gn6dd5mi09Z0sU00",
+      three: "https://buy.stripe.com/9B68wRakrdFFg0W1e30sU01",
+      six:   "https://buy.stripe.com/bJecN7gIPdFF6qmbSH0sU02",
+      twelve:"https://buy.stripe.com/3cIbJ378f0ST5mi4qf0sU03"
+    };
+
+    /* -----------------------------
+       ④ モーダルの決済リンクを書き換え
+    ----------------------------- */
+    const modalLinks = document.querySelectorAll("#payment-modal a");
+
+    modalLinks[0].href = buildStripeURL(stripeLinks.one);
+    modalLinks[1].href = buildStripeURL(stripeLinks.three);
+    modalLinks[2].href = buildStripeURL(stripeLinks.six);
+    modalLinks[3].href = buildStripeURL(stripeLinks.twelve);
+
+  });
   </script>
 
 
